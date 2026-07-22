@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 :root {
-  --ivory: #f3efe5;
-  --paper: #faf7ef;
+  --ivory: #fbf8ef;
+  --paper: #fffdf7;
   --ink: #18382f;
   --muted: #68766f;
-  --line: #cbc9bb;
+  --line: #d8d5c9;
   --accent: #d86545;
   --acid: #d9e86f;
 }
@@ -16,7 +16,7 @@ body {
   margin: 0;
   background: var(--ivory);
   color: var(--ink);
-  font-family: Arial, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  font-family: "Gulim", "굴림", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 a { color: inherit; text-decoration: none; }
@@ -31,7 +31,7 @@ main { overflow: hidden; }
   justify-content: space-between;
   border-bottom: 1px solid var(--line);
 }
-.wordmark { font: 700 28px/1 Georgia, serif; letter-spacing: -2px; }
+.wordmark { font: 700 28px/1 "Gulim", "굴림", Arial, sans-serif; letter-spacing: -2px; }
 .wordmark span { color: var(--accent); }
 nav { display: flex; align-items: center; gap: 32px; font-size: 13px; font-weight: 700; letter-spacing: .04em; }
 nav a { transition: opacity .2s ease; }
@@ -53,7 +53,7 @@ nav a:hover { opacity: .55; }
 .eyebrow span { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
 .hero h1, .section h2, footer h2 {
   margin: 0;
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: "Gulim", "굴림", Arial, sans-serif;
   font-weight: 400;
   letter-spacing: -.055em;
 }
@@ -72,12 +72,12 @@ nav a:hover { opacity: .55; }
 .orbit { position: absolute; border: 1px solid rgba(243,239,229,.3); border-radius: 50%; transform: rotate(-18deg); }
 .orbit-one { width: 100%; height: 48%; }
 .orbit-two { width: 55%; height: 100%; transform: rotate(43deg); }
-.orbit-core { display: grid; place-items: center; width: 78px; height: 78px; border-radius: 50%; background: var(--acid); color: var(--ink); font: italic 700 28px Georgia, serif; box-shadow: 0 0 0 20px rgba(217,232,111,.07); }
+.orbit-core { display: grid; place-items: center; width: 78px; height: 78px; border-radius: 50%; background: var(--acid); color: var(--ink); font: 700 28px "Gulim", "굴림", Arial, sans-serif; box-shadow: 0 0 0 20px rgba(217,232,111,.07); }
 .status-pill { align-self: flex-start; border: 1px solid rgba(255,255,255,.25); padding: 9px 12px; border-radius: 99px; color: #d9dedb; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; }
 .status-pill span { display: inline-block; width: 6px; height: 6px; margin-right: 7px; border-radius: 50%; background: var(--acid); }
 .panel-stats { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid rgba(255,255,255,.2); padding-top: 20px; }
 .panel-stats div { display: flex; flex-direction: column; gap: 5px; }
-.panel-stats strong { font: 32px Georgia, serif; }
+.panel-stats strong { font: 32px "Gulim", "굴림", Arial, sans-serif; }
 .panel-stats span { color: #aeb9b4; font-size: 10px; text-transform: uppercase; letter-spacing: .1em; }
 
 .ticker { min-width: max-content; padding: 18px 0; background: var(--accent); color: var(--paper); display: flex; justify-content: center; align-items: center; gap: 26px; text-transform: uppercase; font-size: 10px; font-weight: 800; letter-spacing: .16em; }
@@ -97,12 +97,12 @@ nav a:hover { opacity: .55; }
 .demo-visual::after { width: 380px; height: 150px; transform: rotate(35deg); border-color: rgba(216,101,69,.75); }
 .demo-message { position: relative; z-index: 2; text-align: center; }
 .play-mark { width: 80px; height: 80px; margin: 0 auto 20px; border-radius: 50%; background: var(--acid); color: var(--ink); display: grid; place-items: center; padding-left: 4px; font-size: 20px; box-shadow: 0 0 0 12px rgba(217,232,111,.1); }
-.demo-message p { margin: 0 0 7px; font: 22px Georgia, serif; letter-spacing: .06em; }
+.demo-message p { margin: 0 0 7px; font: 22px "Gulim", "굴림", Arial, sans-serif; letter-spacing: .06em; }
 .demo-message small { color: #c2cec9; font-size: 11px; }
 .demo-duration { position: absolute; z-index: 2; right: 18px; bottom: 16px; font-size: 9px; letter-spacing: .12em; }
 .work-copy { padding: 52px 44px; display: flex; flex-direction: column; }
 .work-number { margin: 0 0 auto; color: var(--acid); font-size: 9px; font-weight: 700; letter-spacing: .16em; }
-.work-copy h3 { margin: 28px 0 22px; font: 400 clamp(38px, 3.2vw, 55px)/1.02 Georgia, serif; letter-spacing: -.04em; }
+.work-copy h3 { margin: 28px 0 22px; font: 400 clamp(38px, 3.2vw, 55px)/1.02 "Gulim", "굴림", Arial, sans-serif; letter-spacing: -.04em; }
 .work-copy > p:not(.work-number) { color: #b8c2bd; font-size: 13px; line-height: 1.8; word-break: keep-all; }
 .tag-row { display: flex; gap: 7px; margin: 20px 0 34px; }
 .tag-row span { border: 1px solid #597067; padding: 6px 9px; border-radius: 50px; color: #c9d2ce; font-size: 9px; }
@@ -110,9 +110,9 @@ nav a:hover { opacity: .55; }
 .project-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; border: 1px solid var(--line); border-top: 0; }
 .project-grid article { min-height: 260px; padding: 28px; border-right: 1px solid var(--line); display: flex; flex-direction: column; }
 .project-grid article:last-child { border: 0; }
-.project-grid article > span { font: italic 21px Georgia, serif; color: var(--accent); }
+.project-grid article > span { font: 21px "Gulim", "굴림", Arial, sans-serif; color: var(--accent); }
 .project-grid article > p { margin: auto 0 10px; text-transform: uppercase; font-size: 9px; font-weight: 800; letter-spacing: .13em; color: var(--muted); }
-.project-grid h3 { margin: 0 0 12px; max-width: 300px; font: 400 28px/1.1 Georgia, serif; letter-spacing: -.03em; }
+.project-grid h3 { margin: 0 0 12px; max-width: 300px; font: 400 28px/1.1 "Gulim", "굴림", Arial, sans-serif; letter-spacing: -.03em; }
 .project-grid small { color: var(--muted); }
 .project-more { background: var(--paper); justify-content: space-between; }
 .project-more h3 { margin: auto 0 0; }
@@ -122,8 +122,8 @@ nav a:hover { opacity: .55; }
 .areas-layout > h2 { font-size: clamp(58px, 6vw, 92px); line-height: .95; }
 .area-list article { display: grid; grid-template-columns: 70px 1fr; gap: 30px; border-top: 1px solid var(--line); padding: 30px 0 36px; }
 .area-list article:last-child { border-bottom: 1px solid var(--line); }
-.area-list > article > span { color: var(--accent); font: italic 18px Georgia, serif; }
-.area-list h3 { margin: 0 0 10px; font: 400 31px Georgia, serif; }
+.area-list > article > span { color: var(--accent); font: 18px "Gulim", "굴림", Arial, sans-serif; }
+.area-list h3 { margin: 0 0 10px; font: 400 31px "Gulim", "굴림", Arial, sans-serif; }
 .area-list p { max-width: 520px; margin: 0; color: var(--muted); font-size: 13px; line-height: 1.75; word-break: keep-all; }
 
 .publications { border-top: 1px solid var(--line); }
@@ -131,13 +131,13 @@ nav a:hover { opacity: .55; }
 .publication-list { border-top: 1px solid var(--ink); }
 .publication-list article { display: grid; grid-template-columns: 90px 1fr 40px; gap: 26px; padding: 29px 12px; border-bottom: 1px solid var(--line); align-items: center; transition: background .2s ease, padding .2s ease; }
 .publication-list article:hover { background: var(--paper); padding-left: 22px; }
-.paper-year { font: italic 17px Georgia, serif; color: var(--accent); }
-.publication-list h3 { margin: 0 0 8px; font: 400 25px/1.2 Georgia, serif; }
+.paper-year { font: 17px "Gulim", "굴림", Arial, sans-serif; color: var(--accent); }
+.publication-list h3 { margin: 0 0 8px; font: 400 25px/1.2 "Gulim", "굴림", Arial, sans-serif; }
 .publication-list p { margin: 0; color: var(--muted); font-size: 11px; }
 .paper-arrow { font-size: 20px; }
 
 .split-section { display: grid; grid-template-columns: 1fr 1fr; gap: 8vw; border-top: 1px solid var(--line); }
-.news-column > h2, .study-column > h2 { margin: 0 0 44px; font-family: Georgia, serif; font-weight: 400; letter-spacing: -.04em; }
+.news-column > h2, .study-column > h2 { margin: 0 0 44px; font-family: "Gulim", "굴림", Arial, sans-serif; font-weight: 400; letter-spacing: -.04em; }
 .news-list { border-top: 1px solid var(--ink); }
 .news-list article { display: grid; grid-template-columns: 86px 1fr; gap: 20px; padding: 24px 0; border-bottom: 1px solid var(--line); }
 .news-list time { color: var(--accent); font-size: 11px; font-weight: 700; }
@@ -145,15 +145,15 @@ nav a:hover { opacity: .55; }
 .study-list { display: flex; flex-direction: column; gap: 10px; }
 .study-list a { background: var(--paper); padding: 22px; display: grid; grid-template-columns: 38px 1fr 24px; align-items: center; transition: transform .2s ease, background .2s ease; }
 .study-list a:hover { transform: translateX(5px); background: #fffdf7; }
-.study-list > a > span { color: var(--accent); font: italic 16px Georgia, serif; }
-.study-list h3 { margin: 0 0 5px; font: 400 21px Georgia, serif; }
+.study-list > a > span { color: var(--accent); font: 16px "Gulim", "굴림", Arial, sans-serif; }
+.study-list h3 { margin: 0 0 5px; font: 400 21px "Gulim", "굴림", Arial, sans-serif; }
 .study-list p { margin: 0; color: var(--muted); font-size: 10px; }
 .study-list b { font-weight: 400; }
 
 footer { background: var(--ink); color: var(--paper); padding: 100px max(32px, calc((100vw - 1380px) / 2)); }
 footer > div:first-child p { color: var(--acid); font-size: 11px; text-transform: uppercase; letter-spacing: .15em; }
 footer h2 { margin: 22px 0 60px; font-size: clamp(60px, 7vw, 104px); line-height: .94; }
-.footer-mail { border-bottom: 1px solid #62776f; padding: 20px 0; display: flex; justify-content: space-between; font: 24px Georgia, serif; }
+.footer-mail { border-bottom: 1px solid #62776f; padding: 20px 0; display: flex; justify-content: space-between; font: 24px "Gulim", "굴림", Arial, sans-serif; }
 .footer-bottom { margin-top: 80px; padding-top: 22px; border-top: 1px solid #4b635a; display: flex; justify-content: space-between; color: #aab7b2; font-size: 9px; letter-spacing: .1em; }
 
 @media (max-width: 900px) {

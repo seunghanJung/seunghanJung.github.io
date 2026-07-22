@@ -32,10 +32,10 @@ export default function Home() {
   return (
     <main>
       <header className="site-header">
-        <a className="wordmark" href="#top" aria-label="홈으로 이동">
+        <a className="wordmark" href="#top" aria-label="Go to homepage">
           SH<span>.</span>
         </a>
-        <nav aria-label="주요 메뉴">
+        <nav aria-label="Primary navigation">
           <a href="#work">Research</a>
           <a href="#publications">Papers</a>
           <a href="#news">News</a>
@@ -51,16 +51,16 @@ export default function Home() {
             <em>for people.</em>
           </h1>
           <p className="hero-intro">
-            안녕하세요, 연구자 <strong>Seunghan</strong>입니다. 사람을 이해하고
-            신뢰할 수 있는 인공지능을 만드는 방법을 연구합니다.
+            Hi, I&apos;m <strong>Seunghan</strong>, a researcher exploring how to build
+            intelligent systems that understand people and earn their trust.
           </p>
           <div className="hero-actions">
-            <a className="primary-button" href="#work">연구 살펴보기 <span>↓</span></a>
-            <a className="text-link" href="#publications">논문 목록 보기 ↗</a>
+            <a className="primary-button" href="#work">Explore my research <span>↓</span></a>
+            <a className="text-link" href="#publications">View publications ↗</a>
           </div>
         </div>
 
-        <aside className="hero-panel" aria-label="연구자 요약">
+        <aside className="hero-panel" aria-label="Researcher profile summary">
           <div className="panel-orbit" aria-hidden="true">
             <span className="orbit orbit-one" />
             <span className="orbit orbit-two" />
@@ -74,7 +74,7 @@ export default function Home() {
         </aside>
       </section>
 
-      <section className="ticker" aria-label="연구 키워드">
+      <section className="ticker" aria-label="Research keywords">
         <span>Human-Centered AI</span><i>✦</i>
         <span>Multimodal Learning</span><i>✦</i>
         <span>Trustworthy Systems</span><i>✦</i>
@@ -85,20 +85,20 @@ export default function Home() {
         <div className="section-heading">
           <div>
             <p className="section-index">01 — Selected research</p>
-            <h2>연구 실적</h2>
+            <h2>Research Work</h2>
           </div>
-          <p>질문에서 시작해 실제로 작동하는 시스템까지. 최근 프로젝트와 핵심 결과를 소개합니다.</p>
+          <p>From an initial question to a working system, here are selected projects and the results behind them.</p>
         </div>
 
         <article className="featured-work">
           <div className="demo-frame">
             <div className="demo-topline"><span>PROJECT DEMO / 01</span><span>2026</span></div>
-            <div className="demo-visual" aria-label="데모 영상 자리 표시자">
+            <div className="demo-visual" aria-label="Demo video placeholder">
               <div className="demo-grid" />
               <div className="demo-message">
                 <span className="play-mark" aria-hidden="true">▶</span>
                 <p>DEMO VIDEO</p>
-                <small>실제 연구 영상을 이 영역에 연결할 수 있습니다</small>
+                <small>Your research demo video can be connected here</small>
               </div>
               <span className="demo-duration">01:42</span>
             </div>
@@ -107,11 +107,11 @@ export default function Home() {
             <p className="work-number">01 / FEATURED</p>
             <h3>Context-Aware<br />Research Assistant</h3>
             <p>
-              복잡한 연구 문헌을 이해하고, 연구자의 탐색 흐름에 맞춰 근거 기반 인사이트를
-              제안하는 인터랙티브 AI 시스템입니다.
+              An interactive AI system that understands complex research literature and
+              delivers evidence-based insights within a researcher&apos;s discovery workflow.
             </p>
             <div className="tag-row"><span>LLM</span><span>HCI</span><span>RAG</span></div>
-            <a href="mailto:hello@example.com?subject=Research%20Demo">프로젝트 문의하기 <span>↗</span></a>
+            <a href="mailto:hello@example.com?subject=Research%20Demo">Ask about this project <span>↗</span></a>
           </div>
         </article>
 
@@ -125,19 +125,19 @@ export default function Home() {
       <section className="section research-areas">
         <p className="section-index">02 — Research areas</p>
         <div className="areas-layout">
-          <h2>무엇을<br /><em>연구하나요?</em></h2>
+          <h2>What do I<br /><em>research?</em></h2>
           <div className="area-list">
-            <article><span>01</span><div><h3>Human-Centered AI</h3><p>사람의 판단을 대체하기보다 더 나은 선택을 돕는 지능형 시스템을 설계합니다.</p></div></article>
-            <article><span>02</span><div><h3>Multimodal Learning</h3><p>텍스트, 이미지, 행동 데이터를 함께 이해하는 효율적인 학습 방법을 탐구합니다.</p></div></article>
-            <article><span>03</span><div><h3>Trustworthy Systems</h3><p>불확실성을 설명하고 신뢰할 수 있는 AI 평가 프레임워크를 연구합니다.</p></div></article>
+            <article><span>01</span><div><h3>Human-Centered AI</h3><p>I design intelligent systems that support better human decisions instead of simply replacing them.</p></div></article>
+            <article><span>02</span><div><h3>Multimodal Learning</h3><p>I explore efficient learning methods that understand text, images, and behavioral data together.</p></div></article>
+            <article><span>03</span><div><h3>Trustworthy Systems</h3><p>I study evaluation frameworks for AI systems that communicate uncertainty and earn user trust.</p></div></article>
           </div>
         </div>
       </section>
 
       <section className="section publications" id="publications">
         <div className="section-heading publication-heading">
-          <div><p className="section-index">03 — Publications</p><h2>논문</h2></div>
-          <a href="mailto:hello@example.com?subject=CV%20Request">Full CV 요청하기 ↗</a>
+          <div><p className="section-index">03 — Publications</p><h2>Publications</h2></div>
+          <a href="mailto:hello@example.com?subject=CV%20Request">Request full CV ↗</a>
         </div>
         <div className="publication-list">
           {publications.map((paper) => (
@@ -160,7 +160,7 @@ export default function Home() {
         </div>
         <div className="study-column">
           <p className="section-index">05 — Study archive</p>
-          <h2>스터디 자료</h2>
+          <h2>Study Notes</h2>
           <div className="study-list">
             {studies.map(([number, title, meta]) => (
               <a href="mailto:hello@example.com?subject=Study%20Material" key={number}>
@@ -173,7 +173,7 @@ export default function Home() {
 
       <footer>
         <div>
-          <p>새로운 연구와 협업을 기다립니다.</p>
+          <p>Open to new research and collaboration.</p>
           <h2>Let&apos;s make something<br /><em>meaningful.</em></h2>
         </div>
         <a className="footer-mail" href="mailto:hello@example.com">hello@example.com <span>↗</span></a>
