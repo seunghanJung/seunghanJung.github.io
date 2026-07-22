@@ -7,8 +7,8 @@ export async function generateMetadata(): Promise<Metadata> {
   const host = requestHeaders.get("x-forwarded-host") ?? requestHeaders.get("host") ?? "localhost:3000";
   const protocol = requestHeaders.get("x-forwarded-proto") ?? (host.includes("localhost") ? "http" : "https");
   const base = new URL(`${protocol}://${host}`);
-  const title = "Seunghan — AI Researcher";
-  const description = "Human-centered AI, multimodal learning, and trustworthy systems research portfolio.";
+  const title = "Seung han Jung — IDEA LAB Researcher";
+  const description = "The research portfolio of Seung han Jung, an IDEA LAB researcher working across intelligent systems, engineering design, and human-centered technology.";
 
   return {
     metadataBase: base,

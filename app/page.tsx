@@ -33,25 +33,29 @@ export default function Home() {
     <main>
       <header className="site-header">
         <a className="wordmark" href="#top" aria-label="Go to homepage">
-          SH<span>.</span>
+          <strong>IDEA LAB</strong>
+          <span>RESEARCHER</span>
         </a>
         <nav aria-label="Primary navigation">
+          <a href="#top">About</a>
           <a href="#work">Research</a>
+          <a href="#areas">Areas</a>
           <a href="#publications">Papers</a>
           <a href="#news">News</a>
-          <a className="nav-contact" href="mailto:hello@example.com">Contact ↗</a>
+          <a href="#study">Study</a>
+          <a className="nav-contact" href="#contact">Contact ↗</a>
         </nav>
       </header>
 
       <section className="hero" id="top">
         <div className="hero-copy">
-          <p className="eyebrow"><span /> Researcher · AI &amp; Human Intelligence</p>
+          <p className="eyebrow"><span /> IDEA LAB · Research Portfolio</p>
           <h1>
-            Building intelligent systems<br />
-            <em>for people.</em>
+            Building intelligent<br />
+            <em>systems for people.</em>
           </h1>
           <p className="hero-intro">
-            Hi, I&apos;m <strong>Seunghan</strong>, a researcher exploring how to build
+            Hi, I&apos;m <strong>Seung han Jung</strong>, an IDEA LAB researcher exploring how to build
             intelligent systems that understand people and earn their trust.
           </p>
           <div className="hero-actions">
@@ -60,16 +64,38 @@ export default function Home() {
           </div>
         </div>
 
-        <aside className="hero-panel" aria-label="Researcher profile summary">
-          <div className="panel-orbit" aria-hidden="true">
-            <span className="orbit orbit-one" />
-            <span className="orbit orbit-two" />
-            <span className="orbit-core">AI</span>
+        <aside className="model-showcase" aria-label="Engineering model slideshow">
+          <div className="showcase-label"><span>FORM STUDIES</span><span>01—04</span></div>
+          <div className="model-stage" aria-hidden="true">
+            <div className="model-slide slide-car">
+              <div className="car-model">
+                <span className="car-cabin" />
+                <span className="car-body" />
+                <span className="car-wheel wheel-left" />
+                <span className="car-wheel wheel-right" />
+              </div>
+              <p>AUTOMOTIVE MODEL</p>
+            </div>
+            <div className="model-slide slide-aircraft">
+              <div className="aircraft-model" />
+              <p>AIRCRAFT MODEL</p>
+            </div>
+            <div className="model-slide slide-fighter">
+              <div className="fighter-model" />
+              <p>FIGHTER CONCEPT</p>
+            </div>
+            <div className="model-slide slide-cad">
+              <div className="cad-model">
+                <span className="cad-front" />
+                <span className="cad-top" />
+                <span className="cad-side" />
+              </div>
+              <p>CAD GEOMETRY</p>
+            </div>
           </div>
-          <div className="status-pill"><span /> Open to collaboration</div>
-          <div className="panel-stats">
-            <div><strong>08</strong><span>Publications</span></div>
-            <div><strong>03</strong><span>Research themes</span></div>
+          <div className="showcase-footer">
+            <span>Design · Simulate · Validate</span>
+            <div className="slide-bars"><i /><i /><i /><i /></div>
           </div>
         </aside>
       </section>
@@ -122,7 +148,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section research-areas">
+      <section className="section research-areas" id="areas">
         <p className="section-index">02 — Research areas</p>
         <div className="areas-layout">
           <h2>What do I<br /><em>research?</em></h2>
@@ -158,7 +184,7 @@ export default function Home() {
             {news.map(([date, item]) => <article key={date}><time>{date}</time><p>{item}</p></article>)}
           </div>
         </div>
-        <div className="study-column">
+        <div className="study-column" id="study">
           <p className="section-index">05 — Study archive</p>
           <h2>Study Notes</h2>
           <div className="study-list">
@@ -171,13 +197,13 @@ export default function Home() {
         </div>
       </section>
 
-      <footer>
+      <footer id="contact">
         <div>
           <p>Open to new research and collaboration.</p>
           <h2>Let&apos;s make something<br /><em>meaningful.</em></h2>
         </div>
         <a className="footer-mail" href="mailto:hello@example.com">hello@example.com <span>↗</span></a>
-        <div className="footer-bottom"><span>© 2026 SEUNGHAN</span><span>SEOUL, SOUTH KOREA · KST</span><a href="#top">BACK TO TOP ↑</a></div>
+        <div className="footer-bottom"><span>© 2026 SEUNG HAN JUNG</span><span>IDEA LAB · SEOUL, SOUTH KOREA</span><a href="#top">BACK TO TOP ↑</a></div>
       </footer>
     </main>
   );
