@@ -1,3 +1,5 @@
+import { DemoPlaylist } from "./DemoPlaylist";
+
 const publications = [
   {
     year: "2026",
@@ -118,25 +120,16 @@ export default function Home() {
 
         <article className="featured-work">
           <div className="demo-frame">
-            <div className="demo-topline"><span>PROJECT DEMO / 01</span><span>2026</span></div>
-            <div className="demo-visual" aria-label="Demo video placeholder">
-              <div className="demo-grid" />
-              <div className="demo-message">
-                <span className="play-mark" aria-hidden="true">▶</span>
-                <p>DEMO VIDEO</p>
-                <small>Your research demo video can be connected here</small>
-              </div>
-              <span className="demo-duration">01:42</span>
-            </div>
+            <DemoPlaylist />
           </div>
           <div className="work-copy">
             <p className="work-number">01 / FEATURED</p>
-            <h3>Context-Aware<br />Research Assistant</h3>
+            <h3>AI Agent for<br />pyHyp Meshing</h3>
             <p>
-              An interactive AI system that understands complex research literature and
-              delivers evidence-based insights within a researcher&apos;s discovery workflow.
+              A sequential demonstration of an AI-assisted CFD workflow: generating a mesh
+              with pyHyp, inspecting the result, and preparing the RANS solver configuration.
             </p>
-            <div className="tag-row"><span>LLM</span><span>HCI</span><span>RAG</span></div>
+            <div className="tag-row"><span>AI AGENT</span><span>CFD</span><span>MESHING</span></div>
             <a href="mailto:hello@example.com?subject=Research%20Demo">Ask about this project <span>↗</span></a>
           </div>
         </article>
