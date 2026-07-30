@@ -42,3 +42,10 @@ next-env.d.ts
 .devserver.*.log
 /outputs/
 /work/
+
+# OpenAI Sites hosting config (not used by the GitHub Pages deployment)
+/.openai/
+
+# Uncompressed source recordings. The compressed copies that the site actually
+# serves live in public/demos/ and are ~half the size.
+/Demo_AI_agent_*.mp4

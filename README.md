@@ -1,98 +1,35 @@
-# vinext-starter
+# 정승한 | IDEA LAB Researcher
 
-A clean full-stack starter running on
-[vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and
-Drizzle support.
+IDEA LAB 연구 포트폴리오 사이트입니다. AI 에이전트를 활용한 CFD 워크플로 데모와
+스터디 자료를 공개합니다.
 
-## Prerequisites
+## 구성
 
-- Node.js `>=22.13.0`
+- `index.html` — 사이트 전체 (스타일·스크립트 인라인, 빌드 불필요)
+- `public/demos/*.mp4` — 연구 데모 영상 3편 (pyHyp 메시 생성 → 형상 확인 → RANS 설정)
+- `study/*.pdf` — 스터디 자료 6건 (ANN, RNN, PCA & MLE, Chapter 3/4/5/7)
 
-## Quick Start
+## 로컬에서 보기
 
-```bash
-npm install
-npm run dev
-npm run build
-```
+`index.html`을 브라우저로 바로 열면 됩니다. 별도 서버나 빌드 과정이 없습니다.
 
-This starter does not use `wrangler.jsonc`.
+## 배포
 
-## Included Shape
+GitHub Pages로 배포합니다. 저장소 Settings → Pages에서 Source를 `main` 브랜치의
+`/ (root)`로 지정하면 `index.html`이 그대로 서비스됩니다. 루트의 `.nojekyll`은
+Jekyll 전처리를 건너뛰게 해서 파일이 있는 그대로 서빙되도록 합니다.
 
-- edit site code under `app/`
-- `.openai/hosting.json` declares optional Sites D1 and R2 bindings
-- `vite.config.ts` simulates declared bindings for local development
-- `db/schema.ts` starts intentionally empty
-- `examples/d1/` contains an optional D1 example surface
-- `drizzle.config.ts` supports local migration generation when needed
+## 색상 팔레트
 
-## Workspace Auth Headers
+| 변수 | 값 | 용도 |
+| --- | --- | --- |
+| `--accent` | `#0f52ba` | 사파이어 — 강조 텍스트, 티커, 배지, 현재 챕터 |
+| `--ink` | `#0f213d` | 딥 네이비 — 본문, 데모 패널, footer 배경 |
+| `--acid` | `#f0c14b` | 골드 — 포인트 (버튼 화살표, 섹션 라벨) |
+| `--ivory` / `--line` | `#fdfbf6` / `#e2dfd6` | 종이 톤 배경과 구분선 |
+| `--muted` | `#6b7484` | 보조 텍스트 |
 
-OpenAI workspace sites can read the current user's email from
-`oai-authenticated-user-email`.
+## 참고
 
-SIWC-authenticated workspace sites may also receive
-`oai-authenticated-user-full-name` when the user's SIWC profile has a non-empty
-`name` claim. The full-name value is percent-encoded UTF-8 and is accompanied by
-`oai-authenticated-user-full-name-encoding: percent-encoded-utf-8`.
-
-Treat the full name as optional and fall back to email when it is absent:
-
-```tsx
-import { headers } from "next/headers";
-
-export default async function Home() {
-  const requestHeaders = await headers();
-  const email = requestHeaders.get("oai-authenticated-user-email");
-  const encodedFullName = requestHeaders.get("oai-authenticated-user-full-name");
-  const fullName =
-    encodedFullName &&
-    requestHeaders.get("oai-authenticated-user-full-name-encoding") ===
-      "percent-encoded-utf-8"
-      ? decodeURIComponent(encodedFullName)
-      : null;
-
-  const displayName = fullName ?? email;
-  // ...
-}
-```
-
-## Optional Dispatch-Owned ChatGPT Sign-In
-
-Import the ready-to-use helpers from `app/chatgpt-auth.ts` when the site needs
-optional or required ChatGPT sign-in:
-
-- Use `getChatGPTUser()` for optional signed-in UI.
-- Use `requireChatGPTUser(returnTo)` for server-rendered pages that should send
-  anonymous visitors through Sign in with ChatGPT.
-- Use `chatGPTSignInPath(returnTo)` and `chatGPTSignOutPath(returnTo)` for
-  browser links or actions.
-- Pass a same-origin relative `returnTo` path for the destination after sign-in
-  or sign-out. The helper validates and safely encodes it.
-- Mark protected pages with `export const dynamic = "force-dynamic"` because
-  they depend on per-request identity headers.
-
-Dispatch owns `/signin-with-chatgpt`, `/signout-with-chatgpt`, `/callback`, the
-OAuth cookies, and identity header injection. Do not implement app routes for
-those reserved paths. Routes that do not import and call the helper remain
-anonymous-compatible.
-
-SIWC establishes identity only; it does not prove workspace membership. Use the
-Sites hosting platform's access policy controls for workspace-wide restrictions,
-or enforce explicit server-side membership or allowlist checks.
-
-Use SIWC for account pages, user-specific dashboards, saved records, and write
-actions tied to the current ChatGPT user. Leave public content anonymous.
-
-## Useful Commands
-
-- `npm run dev`: start local development
-- `npm run build`: verify the vinext build output
-- `npm test`: build the starter and verify its rendered loading skeleton
-- `npm run db:generate`: generate Drizzle migrations after schema changes
-
-## Learn More
-
-- [vinext Documentation](https://github.com/cloudflare/vinext)
-- [Drizzle D1 Guide](https://orm.drizzle.team/docs/get-started/d1-new)
+이 저장소에는 별개의 Vite/Cloudflare Workers 실험 코드(`app/`, `worker/`, `db/`)가
+함께 있습니다. 공개되는 사이트는 루트의 `index.html` 정적 페이지입니다.
