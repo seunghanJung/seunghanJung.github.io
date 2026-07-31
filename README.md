@@ -6,8 +6,9 @@ IDEA LAB 연구 포트폴리오 사이트입니다. AI 에이전트를 활용한
 ## 구성
 
 - `index.html` — 사이트 전체 (스타일·스크립트 인라인, 빌드 불필요)
-- `public/demos/*.mp4` — 연구 데모 영상 3편 (pyHyp 메시 생성 → 형상 확인 → RANS 설정)
-- `study/*.pdf` — 스터디 자료 6건 (ANN, RNN, PCA & MLE, Chapter 3/4/5/7)
+- `public/idea-lab-logo.png` — 연구실 로고 (투명 배경, 여백 크롭 완료)
+- `public/demos/*.mp4` — 연구 데모 영상 3편 (메시 생성 → 형상 확인 → CFD 메시 설정)
+- `study/*.pdf` — 스터디 자료 6건 (ANN, PCA & MLE, Chapter 3/4/5/7)
 
 ## 로컬에서 보기
 
