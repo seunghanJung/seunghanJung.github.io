@@ -65,6 +65,12 @@
     .hero h1 em, .areas-layout h2 em, footer h2 em { color: var(--accent); font-style: normal; font-weight: 450; }
     .hero-intro { max-width: 580px; margin: 38px 0 0; color: var(--muted); font-size: 17px; line-height: 1.75; word-break: keep-all; }
     .hero-intro strong { color: var(--ink); }
+    .affiliation { display: flex; flex-wrap: wrap; gap: 0 44px; max-width: 620px; margin: 34px 0 0; padding: 18px 0 0; border-top: 1px solid var(--line); list-style: none; }
+    .affiliation li { display: flex; flex-direction: column; gap: 7px; padding: 6px 0; }
+    .affiliation li > span { color: var(--muted); text-transform: uppercase; font-size: 9px; font-weight: 800; letter-spacing: .16em; }
+    .affiliation strong { font-size: 14px; font-weight: 650; letter-spacing: -.01em; }
+    .affiliation a { color: var(--accent); font-size: 14px; font-weight: 650; border-bottom: 1px solid var(--accent); padding-bottom: 3px; transition: opacity .2s ease; }
+    .affiliation a:hover { opacity: .55; }
     .hero-actions { display: flex; align-items: center; gap: 28px; margin-top: 40px; }
     .primary-button { background: var(--ink); color: var(--paper); padding: 17px 22px; font-size: 13px; font-weight: 700; }
     .primary-button span { margin-left: 22px; color: var(--acid); }
@@ -254,6 +260,11 @@
           안녕하세요. <strong>IDEA LAB 연구자 정승한</strong>입니다.
           사람을 이해하고 신뢰를 얻는 지능형 시스템과 공학 설계 자동화를 연구합니다.
         </p>
+        <ul class="affiliation">
+          <li><span>University</span><strong>Hanyang University ERICA</strong></li>
+          <li><span>Department</span><strong>Mechanical Engineering</strong></li>
+          <li><span>Email</span><a href="mailto:jshan0407@hanyang.ac.kr">jshan0407@hanyang.ac.kr</a></li>
+        </ul>
         <div class="hero-actions">
           <a class="primary-button" href="#work">연구 데모 보기 <span>→</span></a>
           <a class="text-link" href="#study">스터디 자료 보기 ↘</a>
