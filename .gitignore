@@ -49,3 +49,7 @@ next-env.d.ts
 # Uncompressed source recordings. The compressed copies that the site actually
 # serves live in public/demos/ and are ~half the size.
 /Demo_AI_agent_*.mp4
+
+# Source images kept locally; the web-optimised copies live in public/
+/정승한 증명사진*.jpg
+/HYU_logo_singlecolor_png.png
