@@ -70,11 +70,21 @@
     .affiliation a { color: var(--accent); font-size: 17px; font-weight: 650; border-bottom: 1px solid var(--accent); padding-bottom: 3px; transition: opacity .2s ease; }
     .affiliation a:hover { opacity: .55; }
 
-    .portrait { position: relative; margin: 0; align-self: center; max-width: 430px; justify-self: end; }
-    .portrait img { display: block; width: 100%; height: auto; background: var(--paper); }
-    .portrait::after { content: ""; position: absolute; inset: 0; border: 1px solid var(--line); pointer-events: none; }
-    .portrait figcaption { display: flex; align-items: baseline; gap: 10px; margin-top: 18px; color: var(--muted); font-size: 14px; }
-    .portrait figcaption strong { color: var(--ink); font-size: 19px; font-weight: 650; letter-spacing: -.02em; }
+    .portrait { margin: 0; align-self: center; max-width: 430px; justify-self: end; }
+    .portrait img { display: block; width: 100%; height: auto; background: var(--paper); border: 1px solid var(--line); border-bottom: 0; }
+    .portrait figcaption {
+      position: relative;
+      padding: 24px 26px 26px;
+      background: var(--ink);
+      color: var(--paper);
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+    .portrait figcaption::before { content: ""; position: absolute; left: 0; top: 0; width: 62px; height: 3px; background: var(--acid); }
+    .portrait-role { color: var(--acid); font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .18em; }
+    .portrait figcaption strong { font-size: 30px; font-weight: 650; line-height: 1; letter-spacing: -.03em; }
+    .portrait-en { color: #9facbe; font-size: 15px; letter-spacing: .04em; }
 
     .ticker { min-width: max-content; padding: 22px 0; background: var(--accent); color: var(--paper); display: flex; justify-content: center; align-items: center; gap: 28px; text-transform: uppercase; font-size: 13px; font-weight: 800; letter-spacing: .14em; }
     .ticker i { color: var(--acid); font-style: normal; }
@@ -227,7 +237,11 @@
 
       <figure class="portrait">
         <img src="public/seunghan-jung.jpg" alt="정승한" width="900" height="1200">
-        <figcaption><strong>정승한</strong> Seung Han Jung</figcaption>
+        <figcaption>
+          <span class="portrait-role">Researcher</span>
+          <strong>정승한</strong>
+          <span class="portrait-en">Seung Han Jung</span>
+        </figcaption>
       </figure>
     </section>
 
