@@ -94,31 +94,13 @@
     .section-heading h2, .study-heading h2 { font-size: clamp(55px, 6vw, 84px); line-height: .95; }
     .section-heading > p { width: min(460px, 100%); margin: 0; color: var(--muted); font-size: 16px; line-height: 1.75; word-break: keep-all; text-wrap: pretty; }
 
-    .featured-work { display: grid; grid-template-columns: 1.45fr .75fr; min-height: 550px; background: var(--ink); color: var(--paper); }
+    .featured-work { display: grid; grid-template-columns: 1.45fr .75fr; background: var(--ink); color: var(--paper); }
     .demo-frame { padding: 18px; border-right: 1px solid rgba(255,255,255,.18); display: flex; }
-    .demo-player { width: 100%; display: flex; flex-direction: column; }
+    .demo-player { width: 100%; display: flex; flex-direction: column; justify-content: center; }
     .demo-player-topline { height: 44px; display: flex; justify-content: space-between; align-items: center; color: #9facbe; font-size: 12px; font-weight: 700; letter-spacing: .14em; }
-    .demo-video-shell { width: 100%; aspect-ratio: 16 / 9; overflow: hidden; background: #080a10; border: 1px solid rgba(255,255,255,.12); }
+    /* Matches the source recording (1910x898) exactly, so the frame has no letterbox bars. */
+    .demo-video-shell { width: 100%; aspect-ratio: 1910 / 898; overflow: hidden; background: #080a10; border: 1px solid rgba(255,255,255,.12); }
     .demo-video { display: block; width: 100%; height: 100%; object-fit: contain; background: #080a10; }
-    .demo-chapters { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 16px; }
-    .demo-chapter {
-      position: relative; min-width: 0; min-height: 132px; padding: 16px 16px 18px;
-      border: 1px solid #3a5c8f; border-radius: 4px; background: #17325a; color: #c8d0dd;
-      text-align: left; cursor: pointer; display: flex; flex-direction: column; align-items: flex-start;
-      transition: background .18s ease, border-color .18s ease, color .18s ease, transform .18s ease;
-    }
-    .demo-chapter::after {
-      content: "▶ PLAY"; position: absolute; right: 14px; bottom: 14px;
-      font-size: 10px; font-weight: 800; letter-spacing: .1em; opacity: .55; transition: opacity .18s ease;
-    }
-    .demo-chapter:hover { background: #24528f; border-color: var(--accent); color: #fff; transform: translateY(-3px); }
-    .demo-chapter:hover::after { opacity: 1; }
-    .demo-chapter:focus-visible { outline: 2px solid var(--acid); outline-offset: 2px; }
-    .demo-chapter.is-current { background: var(--accent); border-color: var(--accent); color: #fff; }
-    .demo-chapter.is-current::after { content: "NOW PLAYING"; opacity: 1; }
-    .demo-chapter > span { font-size: 26px; font-weight: 750; line-height: 1; letter-spacing: -.02em; opacity: .85; }
-    .demo-chapter strong { margin-top: auto; font-size: 17px; letter-spacing: -.02em; }
-    .demo-chapter small { margin-top: 6px; padding-right: 52px; color: inherit; font-size: 12px; line-height: 1.4; opacity: .78; }
     .work-copy { padding: 52px 44px; display: flex; flex-direction: column; justify-content: center; }
     .work-copy h3 { margin: 0 0 24px; font-size: clamp(38px, 3.2vw, 55px); line-height: 1.04; letter-spacing: -.035em; }
     .work-copy > p { color: #bac1d0; font-size: 16px; line-height: 1.75; word-break: keep-all; text-wrap: pretty; }
@@ -186,8 +168,6 @@
       .section-heading, .study-heading { display: block; }
       .section-heading > p, .study-heading p:last-child { width: 100%; margin-top: 26px; }
       .section-heading h2, .study-heading h2 { font-size: 54px; }
-      .demo-chapters { grid-template-columns: 1fr; }
-      .demo-chapter { min-height: 96px; }
       .work-copy { padding: 38px 28px; }
       .area-list article { grid-template-columns: 38px 1fr; gap: 16px; }
       .study-grid { grid-template-columns: 1fr; }
@@ -201,7 +181,6 @@
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       * { transition: none !important; }
-      .demo-chapter:hover { transform: none; }
     }
   </style>
 </head>
@@ -255,38 +234,24 @@
     <section class="section" id="work">
       <div class="section-heading">
         <div><p class="section-index">01 — Selected research</p><h2>Research Demo</h2></div>
-        <p>AI 에이전트를 활용한 pyHyp 메시 생성부터 형상 확인, CFD 메시 설정, SALOME 메싱 에이전트까지의 연구 과정을 영상으로 확인할 수 있습니다.</p>
+        <p>AI 에이전트를 활용한 메시 생성 자동화 연구 과정을 영상으로 확인할 수 있습니다.</p>
       </div>
 
       <article class="featured-work">
         <div class="demo-frame">
           <div class="demo-player">
-            <div class="demo-player-topline"><span>DEMO SEQUENCE</span><span id="demoCounter">01 / 04</span></div>
+            <div class="demo-player-topline"><span>DEMO</span><span>SALOME MESHING AGENT</span></div>
             <div class="demo-video-shell">
-              <video id="demoVideo" class="demo-video" controls playsinline preload="metadata" aria-label="연구 데모 영상">
-                <source id="demoSource" src="public/demos/meshing-pyhyp.mp4" type="video/mp4">
+              <video class="demo-video" controls playsinline preload="metadata" aria-label="SALOME 메싱 에이전트 데모 영상">
+                <source src="public/demos/salome-meshing-agent.mp4" type="video/mp4">
                 현재 브라우저에서는 동영상을 재생할 수 없습니다.
               </video>
-            </div>
-            <div class="demo-chapters" aria-label="데모 영상 목록">
-              <button class="demo-chapter is-current" type="button" data-index="0" data-src="public/demos/meshing-pyhyp.mp4">
-                <span>01</span><strong>Mesh Generation</strong><small>AI agent meshing workflow with pyHyp</small>
-              </button>
-              <button class="demo-chapter" type="button" data-index="1" data-src="public/demos/meshing-preview.mp4">
-                <span>02</span><strong>Mesh Preview</strong><small>Geometry and generated mesh inspection</small>
-              </button>
-              <button class="demo-chapter" type="button" data-index="2" data-src="public/demos/rans-setting.mp4">
-                <span>03</span><strong>CFD Mesh Setting</strong><small>Mesh configuration for CFD analysis</small>
-              </button>
-              <button class="demo-chapter" type="button" data-index="3" data-src="public/demos/salome-meshing-agent.mp4">
-                <span>04</span><strong>SALOME Meshing Agent</strong><small>Agent-driven meshing inside SALOME</small>
-              </button>
             </div>
           </div>
         </div>
         <div class="work-copy">
-          <h3>AI Agent for<br>CFD Meshing</h3>
-          <p>AI 지원 CFD 워크플로의 순차 데모입니다. pyHyp 메시 생성, 결과 검토, CFD 메시 설정, SALOME 메싱 에이전트 과정을 소개합니다.</p>
+          <h3>SALOME<br>Meshing Agent</h3>
+          <p>AI 에이전트가 SALOME 안에서 메시 생성 과정을 직접 수행하는 데모입니다.</p>
           <div class="tag-row"><span>AI AGENT</span><span>CFD</span><span>MESHING</span><span>SALOME</span></div>
           <a href="#study">연관 스터디 자료 보기 <span>↓</span></a>
         </div>
@@ -367,32 +332,5 @@
     </footer>
   </main>
 
-  <script>
-    (() => {
-      const video = document.getElementById("demoVideo");
-      const source = document.getElementById("demoSource");
-      const counter = document.getElementById("demoCounter");
-      const buttons = Array.from(document.querySelectorAll(".demo-chapter"));
-      const total = String(buttons.length).padStart(2, "0");
-      let current = 0;
-
-      function selectDemo(index, continuePlayback) {
-        current = index;
-        source.src = buttons[index].dataset.src;
-        counter.textContent = String(index + 1).padStart(2, "0") + " / " + total;
-        buttons.forEach((button, buttonIndex) => {
-          button.classList.toggle("is-current", buttonIndex === index);
-          button.setAttribute("aria-pressed", buttonIndex === index ? "true" : "false");
-        });
-        video.load();
-        if (continuePlayback) video.play().catch(() => {});
-      }
-
-      buttons.forEach((button, index) => {
-        button.addEventListener("click", () => selectDemo(index, true));
-      });
-      video.addEventListener("ended", () => selectDemo((current + 1) % buttons.length, true));
-    })();
-  </script>
 </body>
 </html>
