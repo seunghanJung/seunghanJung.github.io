@@ -3,383 +3,362 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="정승한의 IDEA LAB 연구 포트폴리오와 스터디 자료">
+  <meta name="description" content="정승한 · IDEA LAB (Hanyang University ERICA) — AMR-based CFD remeshing agent, engineering design automation">
   <title>정승한 | IDEA LAB Researcher</title>
+  <link rel="icon" href="public/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --ivory: #fdfbf6;
+      --ink: #111418;        /* 본문·제목 (거의 검정) */
+      --black: #0b0d10;      /* 헤더·푸터 */
+      --navy: #0f213d;       /* 대표 연구 블록 */
+      --blue: #0f52ba;       /* 사파이어 포인트 */
+      --sky: #8db8e6;        /* 남색 위 보조 글자 */
       --paper: #ffffff;
-      --ink: #0f213d;
-      --muted: #6b7484;
-      --line: #e2dfd6;
-      --accent: #0f52ba;
-      --acid: #f0c14b;
-      --font: "Segoe UI Variable Text", "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+      --mist: #f3f5f8;
+      --line: #e1e6ec;
+      --muted: #5d6b7c;
+      --gold: #f0c14b;
+      --font: "Noto Sans KR", "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+      --shell: min(1240px, calc(100% - 64px));
     }
-
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      background: var(--ivory);
-      color: var(--ink);
-      font-family: var(--font);
-      -webkit-font-smoothing: antialiased;
-    }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
     a { color: inherit; text-decoration: none; }
-    button { font: inherit; }
-    main { overflow: hidden; }
+    img, video { max-width: 100%; }
+    .shell { width: var(--shell); margin: 0 auto; }
+    .section-number { margin: 0; font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--blue); display: flex; align-items: center; gap: 10px; }
+    .section-number::before { content: ""; width: 22px; height: 2px; background: currentColor; }
 
-    .site-header {
-      width: min(1380px, calc(100% - 64px));
-      min-height: 104px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid var(--line);
+    /* ---------- 헤더: 검정 바 ---------- */
+    .site-header { position: sticky; top: 0; z-index: 30; background: var(--black); color: #fff; border-bottom: 1px solid rgba(255,255,255,.08); }
+    .site-header .shell { height: 86px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .wordmark img { display: block; height: 44px; width: auto; }
+    .site-nav { display: flex; align-items: center; }
+    .site-nav a { position: relative; padding: 8px 20px; font-size: 15px; font-weight: 700; color: #d6dbe3; letter-spacing: -.01em; transition: color .2s; }
+    .site-nav a + a::before { content: ""; position: absolute; left: 0; top: 50%; width: 1px; height: 16px; background: rgba(255,255,255,.22); transform: translateY(-50%); }
+    .site-nav a:hover, .site-nav a.is-active { color: #fff; }
+    .site-nav a.is-active::after { content: ""; position: absolute; left: 20px; right: 20px; bottom: 0; height: 2px; background: #fff; }
+
+    /* ---------- 히어로: 배경 영상(격자 생성 → refine → Cp → 충격파) 위에 이름 ---------- */
+    .hero { position: relative; min-height: 660px; height: calc(100vh - 86px); max-height: 820px; background: #fff; overflow: hidden; }
+    .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 62% 50%; background: #fff; }
+    .hero::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+      background: linear-gradient(90deg, rgba(255,255,255,.96) 0%, rgba(255,255,255,.92) 26%, rgba(255,255,255,.55) 42%, rgba(255,255,255,0) 58%); }
+    .hero .shell { position: relative; z-index: 2; height: 100%; display: flex; align-items: center; }
+    .hero-copy { max-width: 560px; padding-block: 60px; }
+    .hero-role { margin: 0 0 14px; font-size: 13px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--blue); display: flex; align-items: center; gap: 10px; }
+    .hero-role::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--blue); }
+    .hero h1 { margin: 0; font-size: clamp(56px, 7vw, 92px); line-height: 1; letter-spacing: -.06em; font-weight: 800; color: var(--ink); }
+    .hero-en { margin: 14px 0 0 4px; font-size: 15px; font-weight: 600; letter-spacing: .32em; text-transform: uppercase; color: var(--muted); }
+    .hero-lead { margin: 30px 0 0; font-size: clamp(17px, 1.6vw, 21px); line-height: 1.7; color: #3a4857; word-break: keep-all; text-wrap: pretty; }
+    .hero-lead strong { color: var(--ink); font-weight: 700; }
+    .hero-links { display: flex; align-items: center; gap: 26px; margin-top: 40px; }
+    .hero-about { display: inline-flex; align-items: center; gap: 10px; padding: 10px 2px; font-size: 15px; font-weight: 700; border-bottom: 2px solid var(--ink); transition: color .2s, border-color .2s; }
+    .hero-about svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .hero-about:hover { color: var(--blue); border-color: var(--blue); }
+    .hero-demo { display: inline-flex; align-items: center; gap: 10px; padding: 12px 22px; border-radius: 999px; background: var(--blue); color: #fff; font-size: 15px; font-weight: 700; box-shadow: 0 10px 26px rgba(15,82,186,.25); transition: transform .2s, box-shadow .2s, background .2s; }
+    .hero-demo:hover { transform: translateY(-2px); background: #0c4397; box-shadow: 0 16px 34px rgba(15,82,186,.3); }
+    .hero-demo svg { width: 14px; height: 14px; fill: currentColor; }
+
+    /* ---------- 파이프라인 띠: 영상 진행에 맞춰 단계 표시 ---------- */
+    .pipe { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: #fff; }
+    .pipe .shell { min-height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; padding-block: 10px; }
+    .pipe-left { display: flex; align-items: center; gap: 14px; font-size: 14px; color: var(--ink); font-weight: 500; }
+    .pipe-badge { padding: 5px 10px; border: 1px solid var(--line); border-radius: 4px; font-size: 11px; font-weight: 700; letter-spacing: .14em; color: var(--muted); }
+    .pipe-steps { display: flex; gap: 6px; flex-wrap: wrap; }
+    .pipe-steps span { position: relative; padding: 10px 12px; font-size: 13px; font-weight: 600; color: #9aa6b3; transition: color .25s; white-space: nowrap; }
+    .pipe-steps span b { font-weight: 700; font-size: 11px; margin-right: 6px; color: var(--blue); opacity: .65; }
+    .pipe-steps span.is-on { color: var(--ink); }
+    .pipe-steps span.is-on::after { content: ""; position: absolute; left: 10px; right: 10px; bottom: 2px; height: 2px; background: var(--ink); }
+
+    /* ---------- 관심 분야: 한 줄 ---------- */
+    .focus { background: #fff; border-bottom: 1px solid var(--line); }
+    .focus .shell { display: grid; grid-template-columns: 150px repeat(3, minmax(0, 1fr)); gap: 32px; padding-block: 44px; align-items: start; }
+    .focus-item { padding-left: 18px; border-left: 2px solid var(--blue); }
+    .focus-item strong { display: block; font-size: 17px; letter-spacing: -.02em; }
+    .focus-item span { display: block; margin-top: 4px; font-size: 14px; line-height: 1.6; color: var(--muted); word-break: keep-all; }
+
+    /* ---------- 대표 연구: 남색 블록 ---------- */
+    .feature { background-color: var(--navy); background-image: radial-gradient(ellipse 55% 75% at 88% 0%, rgba(80,140,220,.22), transparent 70%); color: #fff; padding-block: 92px; }
+    .feature.alt { background: var(--mist); color: var(--ink); background-image: none; }
+    .feature .shell { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); align-items: center; gap: 56px; }
+    .feature.alt .shell { grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); }
+    .feature.alt .feature-copy { order: 2; }
+    .feature .section-number { color: var(--sky); }
+    .feature.alt .section-number { color: var(--blue); }
+    .feature h2 { margin: 12px 0 6px; font-size: clamp(36px, 4.2vw, 56px); line-height: 1.04; letter-spacing: -.05em; font-weight: 800; }
+    .feature-sub { margin: 0 0 18px; font-size: 14px; font-weight: 600; color: var(--sky); }
+    .feature.alt .feature-sub { color: var(--blue); }
+    .feature-copy > p.body { margin: 0; font-size: 15.5px; line-height: 1.8; color: #c9d4e2; word-break: keep-all; text-wrap: pretty; }
+    .feature.alt .feature-copy > p.body { color: #46525f; }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 22px 0 30px; }
+    .tags span { padding: 6px 12px; border: 1px solid rgba(255,255,255,.3); border-radius: 999px; font-size: 12px; font-weight: 600; letter-spacing: .04em; color: #e5e7eb; }
+    .feature.alt .tags span { border-color: #c8d2de; color: #3a4857; }
+    .actions { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
+    .btn-demo { display: inline-flex; align-items: center; gap: 12px; padding: 14px 24px; border-radius: 999px; background: var(--blue); color: #fff; font-size: 15px; font-weight: 700; box-shadow: 0 14px 30px rgba(0,0,0,.25); transition: transform .2s, background .2s; }
+    .btn-demo:hover { transform: translateY(-2px); background: #1a63d6; }
+    .btn-demo i { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: #fff; }
+    .btn-demo i svg { width: 11px; height: 11px; fill: var(--blue); margin-left: 1px; }
+    .text-link { font-size: 14px; font-weight: 600; color: #c9d4e2; border-bottom: 1px solid rgba(255,255,255,.35); padding-bottom: 2px; }
+    .text-link:hover { color: #fff; border-color: #fff; }
+    .feature.alt .text-link { color: var(--blue); border-color: rgba(15,82,186,.4); }
+    .feature-media { margin: 0; border-radius: 16px; overflow: hidden; background: #000; border: 1px solid rgba(255,255,255,.12); box-shadow: 0 24px 60px rgba(0,0,0,.3); }
+    .feature.alt .feature-media { border-color: var(--line); box-shadow: 0 24px 60px rgba(17,24,39,.14); }
+    .feature-media video { display: block; width: 100%; background: #000; }
+    .feature-media figcaption { padding: 12px 18px; font-size: 13px; color: #a9b6c6; background: #0b1220; display: flex; justify-content: space-between; gap: 12px; }
+    .feature-media figcaption b { color: #fff; font-weight: 600; }
+
+    /* ---------- 스터디 자료: 줄 목록 ---------- */
+    .study { background: #fff; padding-block: 84px; }
+    .study-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 10px; }
+    .study-head h2 { margin: 8px 0 0; font-size: clamp(28px, 3vw, 38px); letter-spacing: -.04em; font-weight: 800; }
+    .study-head p { margin: 0; font-size: 14px; color: var(--muted); }
+    .study-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+    .study-list a { display: grid; grid-template-columns: 120px 1.3fr 1fr auto; align-items: center; gap: 24px; padding: 20px 10px; border-bottom: 1px solid var(--line); transition: background .2s; }
+    .study-list a:hover { background: var(--mist); }
+    .study-list .tag { font-size: 12px; font-weight: 700; letter-spacing: .14em; color: var(--blue); text-transform: uppercase; }
+    .study-list strong { font-size: 17px; font-weight: 700; letter-spacing: -.02em; }
+    .study-list span.desc { font-size: 14px; color: var(--muted); }
+    .study-list em { font-style: normal; font-size: 13px; font-weight: 700; white-space: nowrap; }
+    .study-list a:hover em { color: var(--blue); }
+
+    /* ---------- 소개 ---------- */
+    .about { background: var(--mist); padding-block: 84px; border-top: 1px solid var(--line); }
+    .about .shell { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 56px; align-items: center; }
+    .portrait { margin: 0; border-radius: 16px; overflow: hidden; background: #fff; border: 1px solid var(--line); box-shadow: 0 20px 50px rgba(17,24,39,.1); }
+    .portrait img { display: block; width: 100%; height: auto; }
+    .portrait figcaption { padding: 16px 18px; background: var(--navy); color: #fff; display: grid; gap: 4px; position: relative; }
+    .portrait figcaption::before { content: ""; position: absolute; left: 0; top: 0; width: 56px; height: 3px; background: var(--gold); }
+    .portrait-role { color: var(--gold); font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .18em; }
+    .portrait figcaption strong { font-size: 26px; font-weight: 700; line-height: 1.1; letter-spacing: -.03em; }
+    .portrait-en { color: #9facbe; font-size: 14px; letter-spacing: .04em; }
+    .about h2 { margin: 10px 0 18px; font-size: clamp(30px, 3.4vw, 44px); letter-spacing: -.045em; font-weight: 800; line-height: 1.1; }
+    .about p.body { margin: 0 0 28px; font-size: 16px; line-height: 1.8; color: #46525f; word-break: keep-all; text-wrap: pretty; max-width: 620px; }
+    .affil { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, auto)); gap: 32px; }
+    .affil li { display: grid; gap: 6px; }
+    .affil span { font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+    .affil strong, .affil a { font-size: 15px; font-weight: 700; }
+    .affil a { color: var(--blue); border-bottom: 1px solid rgba(15,82,186,.4); }
+
+    /* ---------- 푸터: 검정 ---------- */
+    footer { background: var(--black); color: #cdd3dc; padding-block: 44px; }
+    footer .shell { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; font-size: 14px; }
+    footer .brand { display: flex; align-items: center; gap: 16px; }
+    footer .brand img { height: 30px; width: auto; opacity: .9; }
+    footer a { color: #fff; font-weight: 600; }
+    footer .copy { display: grid; gap: 4px; text-align: right; }
+    footer .copy small { color: #8a94a3; font-size: 12px; }
+
+    /* ---------- 반응형 ---------- */
+    @media (max-width: 1000px) {
+      .focus .shell { grid-template-columns: 1fr; gap: 20px; }
+      .feature .shell, .feature.alt .shell { grid-template-columns: 1fr; gap: 32px; }
+      .feature.alt .feature-copy { order: 0; }
+      .about .shell { grid-template-columns: 1fr; }
+      .portrait { max-width: 320px; }
+      .study-list a { grid-template-columns: 100px 1fr auto; }
+      .study-list span.desc { display: none; }
     }
-    .wordmark { display: flex; align-items: center; gap: 16px; line-height: 1; }
-    .wordmark img { display: block; width: auto; }
-    .mark-hyu { height: 48px; }
-    .mark-lab { height: 40px; padding-left: 16px; border-left: 1px solid var(--line); box-sizing: content-box; }
-    nav { display: flex; align-items: center; gap: 32px; font-size: 15px; font-weight: 650; letter-spacing: .01em; }
-    nav a { padding: 4px 0; border-bottom: 2px solid transparent; transition: color .2s ease, border-color .2s ease; }
-    nav a:hover { color: var(--accent); border-bottom-color: var(--accent); }
-    .nav-divider { width: 1px; height: 22px; background: var(--line); margin: 0 -6px; }
-    nav a.quick { display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border: 1px solid var(--ink); border-radius: 50px; font-size: 13px; font-weight: 750; letter-spacing: .06em; text-transform: uppercase; transition: background .2s ease, color .2s ease, border-color .2s ease, transform .2s ease; }
-    nav a.quick svg { width: 15px; height: 15px; flex: none; }
-    nav a.quick.demo { background: var(--ink); color: var(--paper); }
-    nav a.quick.demo:hover { background: var(--accent); border-color: var(--accent); color: var(--paper); transform: translateY(-1px); }
-    nav a.quick.study { color: var(--ink); background: transparent; }
-    nav a.quick.study:hover { border-color: var(--accent); color: var(--accent); background: rgba(15,82,186,.06); transform: translateY(-1px); }
-
-    .hero {
-      width: min(1380px, calc(100% - 64px));
-      min-height: 680px;
-      margin: 0 auto;
-      padding: 78px 0 72px;
-      display: grid;
-      grid-template-columns: minmax(0, 1.3fr) minmax(360px, .7fr);
-      gap: 5vw;
-      align-items: center;
-    }
-    .section-index { text-transform: uppercase; font-size: 14px; font-weight: 800; letter-spacing: .14em; }
-    .hero h1, .section h2, footer h2 { margin: 0; font-weight: 650; letter-spacing: -.045em; }
-    .hero h1 { max-width: 790px; font-size: clamp(52px, 5.4vw, 78px); line-height: 1.04; }
-    .hero h1 em, .areas-layout h2 em, footer h2 em { color: var(--accent); font-style: normal; font-weight: 450; }
-    .hero-intro { max-width: 610px; margin: 36px 0 0; color: var(--muted); font-size: 19px; line-height: 1.75; word-break: keep-all; text-wrap: pretty; }
-    .hero-intro strong { color: var(--ink); }
-    .affiliation { display: flex; flex-wrap: wrap; gap: 0 48px; max-width: 700px; margin: 36px 0 0; padding: 22px 0 0; border-top: 1px solid var(--line); list-style: none; }
-    .affiliation li { display: flex; flex-direction: column; gap: 9px; padding: 8px 0; }
-    .affiliation li > span { color: var(--muted); text-transform: uppercase; font-size: 11px; font-weight: 800; letter-spacing: .14em; }
-    .affiliation strong { font-size: 17px; font-weight: 650; letter-spacing: -.01em; }
-    .affiliation a { color: var(--accent); font-size: 17px; font-weight: 650; border-bottom: 1px solid var(--accent); padding-bottom: 3px; transition: opacity .2s ease; }
-    .affiliation a:hover { opacity: .55; }
-
-    .portrait { margin: 0; align-self: center; max-width: 430px; justify-self: end; }
-    .portrait img { display: block; width: 100%; height: auto; background: var(--paper); border: 1px solid var(--line); border-bottom: 0; }
-    .portrait figcaption {
-      position: relative;
-      padding: 24px 26px 26px;
-      background: var(--ink);
-      color: var(--paper);
-      display: flex;
-      flex-direction: column;
-      gap: 9px;
-    }
-    .portrait figcaption::before { content: ""; position: absolute; left: 0; top: 0; width: 62px; height: 3px; background: var(--acid); }
-    .portrait-role { color: var(--acid); font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .18em; }
-    .portrait figcaption strong { font-size: 30px; font-weight: 650; line-height: 1; letter-spacing: -.03em; }
-    .portrait-en { color: #9facbe; font-size: 15px; letter-spacing: .04em; }
-
-    .ticker { min-width: max-content; padding: 22px 0; background: var(--accent); color: var(--paper); display: flex; justify-content: center; align-items: center; gap: 28px; text-transform: uppercase; font-size: 13px; font-weight: 800; letter-spacing: .14em; }
-    .ticker i { color: var(--acid); font-style: normal; }
-    .section { width: min(1380px, calc(100% - 64px)); margin: 0 auto; padding: 130px 0; }
-    .section-index { margin: 0 0 26px; color: var(--accent); }
-    .section-heading { display: flex; justify-content: space-between; align-items: end; margin-bottom: 64px; }
-    .section-heading h2, .study-heading h2 { font-size: clamp(55px, 6vw, 84px); line-height: .95; }
-    .section-heading > p { width: min(460px, 100%); margin: 0; color: var(--muted); font-size: 16px; line-height: 1.75; word-break: keep-all; text-wrap: pretty; }
-
-    .featured-work { display: grid; grid-template-columns: 1.45fr .75fr; background: var(--ink); color: var(--paper); }
-    .demo-frame { padding: 18px; border-right: 1px solid rgba(255,255,255,.18); display: flex; }
-    .demo-player { width: 100%; display: flex; flex-direction: column; justify-content: center; }
-    .demo-player-topline { height: 44px; display: flex; justify-content: space-between; align-items: center; color: #9facbe; font-size: 12px; font-weight: 700; letter-spacing: .14em; }
-    /* Matches the source recording (1910x898) exactly, so the frame has no letterbox bars. */
-    .demo-video-shell { width: 100%; aspect-ratio: 1910 / 898; overflow: hidden; background: #080a10; border: 1px solid rgba(255,255,255,.12); }
-    .demo-video { display: block; width: 100%; height: 100%; object-fit: contain; background: #080a10; }
-    .work-copy { padding: 52px 44px; display: flex; flex-direction: column; justify-content: center; }
-    .work-copy h3 { margin: 0 0 24px; font-size: clamp(38px, 3.2vw, 55px); line-height: 1.04; letter-spacing: -.035em; }
-    .work-copy > p { color: #bac1d0; font-size: 16px; line-height: 1.75; word-break: keep-all; text-wrap: pretty; }
-    .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 24px 0 36px; }
-    .tag-row span { border: 1px solid #566a8a; padding: 8px 13px; border-radius: 50px; color: #cad0dd; font-size: 12px; font-weight: 650; }
-    .work-copy > a { display: flex; justify-content: space-between; border-top: 1px solid #4f6180; padding-top: 20px; font-size: 14px; font-weight: 700; transition: color .2s ease; }
-    .work-copy > a:hover { color: var(--acid); }
-    .featured-work + .featured-work { margin-top: 36px; }
-    .work-links { display: flex; flex-direction: column; gap: 0; }
-    .demo-site-link { display: flex; justify-content: space-between; align-items: center; margin-top: 16px; padding: 14px 18px; border: 1px solid var(--acid); color: var(--acid); font-size: 14px; font-weight: 800; letter-spacing: .04em; transition: background .2s ease, color .2s ease; }
-    .demo-site-link:hover { background: var(--acid); color: var(--ink); }
-
-    .research-areas { border-top: 1px solid var(--line); }
-    .areas-layout { display: grid; grid-template-columns: .8fr 1.2fr; gap: 10vw; }
-    .areas-layout > h2 { font-size: clamp(58px, 6vw, 92px); line-height: .95; }
-    .area-list article { display: grid; grid-template-columns: 70px 1fr; gap: 30px; border-top: 1px solid var(--line); padding: 30px 0 36px; }
-    .area-list article:last-child { border-bottom: 1px solid var(--line); }
-    .area-list > article > span { color: var(--accent); font-size: 22px; font-weight: 700; }
-    .area-list h3 { margin: 0 0 12px; font-size: 33px; }
-    .area-list p { max-width: 560px; margin: 0; color: var(--muted); font-size: 16px; line-height: 1.75; word-break: keep-all; text-wrap: pretty; }
-
-    .study-section { border-top: 1px solid var(--line); }
-    .study-heading { display: flex; align-items: end; justify-content: space-between; gap: 40px; margin-bottom: 54px; }
-    .study-heading p:last-child { max-width: 460px; margin: 0; color: var(--muted); line-height: 1.75; font-size: 16px; word-break: keep-all; text-wrap: pretty; }
-    .study-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-    .study-card { min-height: 230px; padding: 25px; background: var(--paper); border: 1px solid var(--line); display: flex; flex-direction: column; transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease; }
-    .study-card:hover { transform: translateY(-4px); border-color: #c9c5ba; box-shadow: 0 18px 40px rgba(15, 33, 61, .1); }
-    .study-card-top { display: flex; justify-content: space-between; align-items: center; }
-    .pdf-badge { background: var(--accent); color: #fff; padding: 6px 10px; font-size: 11px; font-weight: 800; letter-spacing: .1em; }
-    .study-card h3 { margin: auto 0 12px; font-size: 25px; line-height: 1.22; letter-spacing: -.025em; word-break: keep-all; text-wrap: pretty; }
-    .study-card p { margin: 0; color: var(--muted); font-size: 14px; }
-    .card-actions { display: flex; gap: 8px; margin-top: 24px; }
-    .card-actions a { flex: 1; padding: 13px 12px; border: 1px solid var(--ink); text-align: center; font-size: 14px; font-weight: 700; }
-    .card-actions a:first-child { background: var(--ink); color: #fff; }
-    .card-actions a:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
-
-    footer { background: var(--ink); color: var(--paper); padding: 100px max(32px, calc((100vw - 1380px) / 2)); }
-    footer > div:first-child p { color: var(--acid); font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: .13em; }
-    footer h2 { margin: 22px 0 60px; font-size: clamp(60px, 7vw, 104px); line-height: .94; }
-    .footer-mail { border-bottom: 1px solid #5f7290; padding: 22px 0; display: flex; align-items: baseline; justify-content: space-between; gap: 20px; font-size: 26px; }
-    .footer-mail a { color: var(--acid); font-size: 20px; font-weight: 650; border-bottom: 1px solid var(--acid); padding-bottom: 3px; transition: opacity .2s ease; }
-    .footer-mail a:hover { opacity: .6; }
-    .footer-bottom { margin-top: 80px; padding-top: 22px; border-top: 1px solid #495e80; display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; color: #acb4c4; font-size: 12px; letter-spacing: .08em; }
-
-    @media (max-width: 900px) {
-      .site-header, .hero, .section { width: min(100% - 36px, 1380px); }
-      .site-header { padding: 20px 0; align-items: flex-start; flex-direction: column; gap: 18px; }
-      nav { width: 100%; overflow-x: auto; gap: 20px; padding-bottom: 5px; scrollbar-width: none; }
-      .hero { grid-template-columns: 1fr; gap: 48px; padding-top: 55px; }
-      .portrait { justify-self: start; max-width: 340px; }
-      .section { padding: 90px 0; }
-      .section-heading, .study-heading { align-items: flex-start; gap: 26px; }
-      .section-heading > p { width: 46%; }
-      .featured-work { grid-template-columns: 1fr; }
-      .demo-frame { border-right: 0; border-bottom: 1px solid rgba(255,255,255,.18); }
-      .work-copy { min-height: 430px; }
-      .areas-layout { grid-template-columns: 1fr; gap: 65px; }
-      .study-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    @media (max-width: 580px) {
+    @media (max-width: 760px) {
+      :root { --shell: calc(100% - 36px); }
+      .site-header .shell { height: 70px; }
       .wordmark img { height: 34px; }
-      nav { gap: 22px; font-size: 14px; }
-      .hero { padding: 46px 0 54px; }
-      .hero h1 { font-size: 43px; line-height: 1.05; }
-      .hero-intro { font-size: 17px; margin-top: 28px; }
-      .portrait { max-width: 280px; }
-      .ticker { justify-content: flex-start; padding-left: 20px; font-size: 12px; }
-      .section-heading, .study-heading { display: block; }
-      .section-heading > p, .study-heading p:last-child { width: 100%; margin-top: 26px; }
-      .section-heading h2, .study-heading h2 { font-size: 54px; }
-      .work-copy { padding: 38px 28px; }
-      .area-list article { grid-template-columns: 38px 1fr; gap: 16px; }
-      .study-grid { grid-template-columns: 1fr; }
-      footer { padding-top: 78px; padding-bottom: 40px; }
-      footer h2 { font-size: 52px; }
-      .footer-mail { flex-direction: column; gap: 12px; font-size: 20px; }
-      .footer-mail a { font-size: 17px; }
-      .footer-bottom { gap: 14px; flex-wrap: wrap; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      * { transition: none !important; }
+      .site-nav a { padding: 6px 10px; font-size: 13px; }
+      .hero { height: auto; min-height: 0; max-height: none; }
+      .hero::after { display: none; }
+      .hero-video { position: static; display: block; height: auto; aspect-ratio: 16 / 9; object-fit: cover; }
+      .hero .shell { height: auto; }
+      .hero-copy { padding-block: 36px 48px; }
+      .pipe-steps { gap: 0; }
+      .affil { grid-template-columns: 1fr; gap: 16px; }
+      footer .shell { flex-direction: column; align-items: flex-start; }
+      footer .copy { text-align: left; }
     }
   </style>
 </head>
 <body>
-  <main>
-    <header class="site-header">
-      <a class="wordmark" href="#top" aria-label="홈으로 이동">
-        <img class="mark-hyu" src="public/hanyang-logo.png" alt="한양대학교 ERICA">
-        <img class="mark-lab" src="public/idea-lab-logo.png" alt="Intelligent Design for Engineering Applications Lab">
+  <header class="site-header">
+    <div class="shell">
+      <a class="wordmark" href="#top" aria-label="홈으로">
+        <img src="public/idea-lab-logo-white.png" alt="Hanyang University · Intelligent Design for Engineering Applications Lab">
       </a>
-      <nav aria-label="주요 메뉴">
-        <a href="#top">About</a>
-        <a href="#work">Research</a>
-        <a href="#areas">Areas</a>
-        <a href="#study">Study</a>
-        <a href="#contact">Contact</a>
-        <span class="nav-divider" aria-hidden="true"></span>
-        <a class="quick demo" href="#work" title="Watch the research demos"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.52.85l10.2-6.5a1 1 0 0 0 0-1.7L9.52 4.65A1 1 0 0 0 8 5.5z"/></svg>Demo</a>
-        <a class="quick study" href="#study" title="Open the study materials"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5V5.5M8 7h8M8 11h8"/></svg>Study</a>
+      <nav class="site-nav" aria-label="주요 메뉴">
+        <a href="#top" class="is-active" data-nav="top">Home</a>
+        <a href="#demo" data-nav="demo">Demo</a>
+        <a href="#study" data-nav="study">Study</a>
+        <a href="#about" data-nav="about">About me</a>
       </nav>
-    </header>
+    </div>
+  </header>
 
-    <section class="hero" id="top">
-      <div class="hero-copy">
-        <h1>Building intelligent<br><em>systems for people.</em></h1>
-        <p class="hero-intro">
-          안녕하세요. <strong>IDEA LAB 연구자 정승한</strong>입니다.
-          사람을 이해하고 신뢰를 얻는 지능형 시스템과 공학 설계 자동화를 연구합니다.
-        </p>
-        <ul class="affiliation">
-          <li><span>University</span><strong>Hanyang University ERICA</strong></li>
-          <li><span>Department</span><strong>Mechanical Engineering</strong></li>
-          <li><span>Email</span><a href="mailto:jshan0407@hanyang.ac.kr">jshan0407@hanyang.ac.kr</a></li>
+  <main id="top">
+    <!-- 첫 화면: 배경 영상 = 초기 격자 생성 → AMR refine → 표면 Cp → 충격파 -->
+    <section class="hero">
+      <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="public/demos/mesh_gen_hero_poster.jpg" aria-label="ONERA M6 날개 위에 격자가 생성되고 refine 되는 영상">
+        <source src="public/demos/mesh_gen_hero.mp4" type="video/mp4">
+      </video>
+      <div class="shell">
+        <div class="hero-copy">
+          <p class="hero-role">Researcher · IDEA Lab</p>
+          <h1>정승한</h1>
+          <p class="hero-en">Seung Han Jung</p>
+          <p class="hero-lead">CFD 격자를 스스로 다듬는 <strong>AMR 재격자화 에이전트</strong>와 <strong>공학 설계 자동화</strong>를 연구합니다.</p>
+          <div class="hero-links">
+            <a class="hero-demo" href="https://seunghanjung.github.io/amr-remeshing-agent-demo/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.52.85l10.2-6.5a1 1 0 0 0 0-1.7L9.52 4.65A1 1 0 0 0 8 5.5z"/></svg>Interactive demo</a>
+            <a class="hero-about" href="#about"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"/></svg><span>About me</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 영상 진행에 맞춰 켜지는 단계 띠 -->
+    <section class="pipe" aria-label="배경 영상 단계">
+      <div class="shell">
+        <div class="pipe-left"><span class="pipe-badge">PIPELINE</span><span>ONERA M6 · Level 2 입력 격자 → 에이전트 AMR</span></div>
+        <div class="pipe-steps" id="pipeSteps">
+          <span data-from="0" data-to="17.5" class="is-on"><b>01</b>Initial mesh</span>
+          <span data-from="17.5" data-to="33"><b>02</b>AMR refinement</span>
+          <span data-from="33" data-to="39"><b>03</b>Surface Cp</span>
+          <span data-from="39" data-to="999"><b>04</b>Shock wave</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 관심 분야 -->
+    <section class="focus">
+      <div class="shell">
+        <p class="section-number">Research areas</p>
+        <div class="focus-item"><strong>AI Engineering</strong><span>복잡한 공학 문제를 해결하는 AI 에이전트와 자동화 워크플로를 연구합니다.</span></div>
+        <div class="focus-item"><strong>Computational Fluid Dynamics</strong><span>격자 생성과 수치해석 과정을 효율화하고 신뢰도 높은 결과를 만드는 방법을 탐구합니다.</span></div>
+        <div class="focus-item"><strong>Aerodynamic Design</strong><span>공력 성능을 목표로 형상을 설계하고 최적화하는 방법을 연구합니다.</span></div>
+      </div>
+    </section>
+
+    <!-- 대표 연구 1 -->
+    <section class="feature" id="demo">
+      <div class="shell">
+        <div class="feature-copy">
+          <p class="section-number">Research 01</p>
+          <h2>AMR-based CFD<br>Remeshing Agent</h2>
+          <p class="feature-sub">LLM agent × NASA refine × SU2 RANS · ONERA M6</p>
+          <p class="body">LLM 에이전트(Qwen)가 ONERA M6 날개의 RANS 해석(SU2)과 적응 격자 세분화(NASA refine)를 반복하며 격자 세분화 변수를 스스로 조정하고, 압력 분포가 수렴하면 멈춥니다. 초보자·중급자·숙련자 수준의 입력 격자 세 가지를 같은 조건에서 비교합니다.</p>
+          <div class="tags"><span>AI AGENT</span><span>AMR</span><span>SU2 · RANS</span><span>NASA REFINE</span><span>QWEN</span></div>
+          <div class="actions">
+            <a class="btn-demo" href="https://seunghanjung.github.io/amr-remeshing-agent-demo/" target="_blank" rel="noopener"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.52.85l10.2-6.5a1 1 0 0 0 0-1.7L9.52 4.65A1 1 0 0 0 8 5.5z"/></svg></i>Run the interactive demo ↗</a>
+            <a class="text-link" href="#study">See related study materials ↓</a>
+          </div>
+        </div>
+        <figure class="feature-media">
+          <video class="demo-video" controls autoplay muted loop playsinline preload="auto" style="aspect-ratio: 1884 / 848;" aria-label="AMR 기반 CFD 재격자화 에이전트 데모 영상">
+            <source src="public/demos/amr-remeshing-agent.mp4" type="video/mp4">
+          </video>
+          <figcaption><b>Demo recording</b><span>3 input-mesh levels · agent cycles · Cp vs experiment</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- 대표 연구 2 -->
+    <section class="feature alt">
+      <div class="shell">
+        <div class="feature-copy">
+          <p class="section-number">Research 02</p>
+          <h2>SALOME<br>Meshing Agent</h2>
+          <p class="feature-sub">AI agent operating SALOME for mesh generation</p>
+          <p class="body">AI 에이전트가 SALOME 안에서 메시 생성 과정을 직접 수행하는 데모입니다. 형상 불러오기부터 격자 설정과 생성까지 에이전트가 단계별로 진행합니다.</p>
+          <div class="tags"><span>AI AGENT</span><span>CFD</span><span>MESHING</span><span>SALOME</span></div>
+          <div class="actions"><a class="text-link" href="#study">See related study materials ↓</a></div>
+        </div>
+        <figure class="feature-media">
+          <video class="demo-video" controls autoplay muted loop playsinline preload="metadata" style="aspect-ratio: 1910 / 898;" aria-label="SALOME 메싱 에이전트 데모 영상">
+            <source src="public/demos/salome-meshing-agent.mp4" type="video/mp4">
+          </video>
+          <figcaption><b>Demo recording</b><span>SALOME meshing driven by an agent</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- 스터디 자료 -->
+    <section class="study" id="study">
+      <div class="shell">
+        <div class="study-head">
+          <div><p class="section-number">Study archive</p><h2>Study Materials</h2></div>
+          <p>IDEA LAB 스터디 자료 · 누르면 PDF가 새 창에서 열립니다</p>
+        </div>
+        <ul class="study-list">
+          <li><a href="study/IDEA%20LAB%20PPT_Chapter3_Study.pdf" target="_blank" rel="noopener"><span class="tag">Chapter 3</span><strong>Core Machine Learning Algorithms</strong><span class="desc">IDEA LAB · Chapter 3</span><em>PDF ↗</em></a></li>
+          <li><a href="study/IDEA%20LAB%20PPT_Chapter4_Study.pdf" target="_blank" rel="noopener"><span class="tag">Chapter 4</span><strong>Deep Learning Algorithms</strong><span class="desc">IDEA LAB · Chapter 4</span><em>PDF ↗</em></a></li>
+          <li><a href="study/IDEA%20LAB%20PPT_Chapter5_Study.pdf" target="_blank" rel="noopener"><span class="tag">Chapter 5</span><strong>Convolutional Neural Networks</strong><span class="desc">IDEA LAB · Chapter 5</span><em>PDF ↗</em></a></li>
+          <li><a href="study/IDEA%20LAB%20PPT_Chapter7_RNN_Study.pdf" target="_blank" rel="noopener"><span class="tag">Chapter 7</span><strong>Recurrent Neural Networks</strong><span class="desc">IDEA LAB · Chapter 7</span><em>PDF ↗</em></a></li>
+          <li><a href="study/IDEA%20LAB%20PPT_Chapter8_Study.pdf" target="_blank" rel="noopener"><span class="tag">Chapter 8</span><strong>Performance Optimization</strong><span class="desc">IDEA LAB · Chapter 8</span><em>PDF ↗</em></a></li>
+          <li><a href="study/IDEA%20LAB%20PPT_PCA_MLE_Study.pdf" target="_blank" rel="noopener"><span class="tag">Statistics</span><strong>PCA &amp; MLE</strong><span class="desc">IDEA LAB · Statistical Learning</span><em>PDF ↗</em></a></li>
         </ul>
       </div>
-
-      <figure class="portrait">
-        <img src="public/seunghan-jung.jpg" alt="정승한" width="900" height="1200">
-        <figcaption>
-          <span class="portrait-role">Researcher</span>
-          <strong>정승한</strong>
-          <span class="portrait-en">Seung Han Jung</span>
-        </figcaption>
-      </figure>
     </section>
 
-    <section class="ticker" aria-label="연구 키워드">
-      <span>AI Agent</span><i>✦</i>
-      <span>Computational Fluid Dynamics</span><i>✦</i>
-      <span>Mesh Generation</span><i>✦</i>
-      <span>Engineering Automation</span>
-    </section>
-
-    <section class="section" id="work">
-      <div class="section-heading">
-        <div><p class="section-index">01 — Selected research</p><h2>Research Demo</h2></div>
-        <p>AI 에이전트가 CFD 격자를 스스로 다듬어 가는 AMR 재격자화 에이전트와, SALOME 안에서 메시를 생성하는 에이전트 데모를 영상으로 확인할 수 있습니다.</p>
-      </div>
-
-      <article class="featured-work">
-        <div class="demo-frame">
-          <div class="demo-player">
-            <div class="demo-player-topline"><span>DEMO</span><span>AMR-BASED CFD REMESHING AGENT</span></div>
-            <!-- 이 녹화본은 1884x848 이라 전역 값(1910/898) 대신 자기 비율을 씀 -->
-            <div class="demo-video-shell" style="aspect-ratio: 1884 / 848;">
-              <video class="demo-video" controls autoplay muted loop playsinline preload="auto" aria-label="AMR 기반 CFD 재격자화 에이전트 데모 영상">
-                <source src="public/demos/amr-remeshing-agent.mp4" type="video/mp4">
-                현재 브라우저에서는 동영상을 재생할 수 없습니다.
-              </video>
-            </div>
-          </div>
-        </div>
-        <div class="work-copy">
-          <h3>AMR-based CFD<br>Remeshing Agent</h3>
-          <p>LLM 에이전트(Qwen)가 ONERA M6 날개의 RANS 해석(SU2)과 적응 격자 세분화(NASA refine)를 반복하며 격자 세분화 변수를 스스로 조정하고, 압력 분포가 수렴하면 멈추는 데모입니다. 초보자·중급자·숙련자 수준의 입력 격자 세 가지를 같은 조건에서 비교합니다.</p>
-          <div class="tag-row"><span>AI AGENT</span><span>AMR</span><span>SU2 · RANS</span><span>NASA REFINE</span><span>QWEN</span></div>
-          <div class="work-links">
-            <a href="#study">See related study materials <span>↓</span></a>
-            <a class="demo-site-link" href="https://seunghanjung.github.io/amr-remeshing-agent-demo/" target="_blank" rel="noopener">Open the interactive demo site <span>↗</span></a>
-          </div>
-        </div>
-      </article>
-
-      <article class="featured-work">
-        <div class="demo-frame">
-          <div class="demo-player">
-            <div class="demo-player-topline"><span>DEMO</span><span>SALOME MESHING AGENT</span></div>
-            <div class="demo-video-shell">
-              <video class="demo-video" controls autoplay muted loop playsinline preload="auto" aria-label="SALOME 메싱 에이전트 데모 영상">
-                <source src="public/demos/salome-meshing-agent.mp4" type="video/mp4">
-                현재 브라우저에서는 동영상을 재생할 수 없습니다.
-              </video>
-            </div>
-          </div>
-        </div>
-        <div class="work-copy">
-          <h3>SALOME<br>Meshing Agent</h3>
-          <p>AI 에이전트가 SALOME 안에서 메시 생성 과정을 직접 수행하는 데모입니다.</p>
-          <div class="tag-row"><span>AI AGENT</span><span>CFD</span><span>MESHING</span><span>SALOME</span></div>
-          <a href="#study">See related study materials <span>↓</span></a>
-        </div>
-      </article>
-    </section>
-
-    <section class="section research-areas" id="areas">
-      <p class="section-index">02 — Research areas</p>
-      <div class="areas-layout">
-        <h2>What do I<br><em>research?</em></h2>
-        <div class="area-list">
-          <article><span>01</span><div><h3>AI Engineering</h3><p>복잡한 공학 문제를 해결하는 AI 에이전트와 자동화 워크플로를 연구합니다.</p></div></article>
-          <article><span>02</span><div><h3>Computational Fluid Dynamics</h3><p>메시 생성과 수치해석 과정을 효율화하고 신뢰도 높은 결과를 만드는 방법을 탐구합니다.</p></div></article>
-          <article><span>03</span><div><h3>Aerodynamic Design</h3><p>공력 성능을 목표로 형상을 설계하고 최적화하는 방법을 연구합니다.</p></div></article>
+    <!-- 소개 -->
+    <section class="about" id="about">
+      <div class="shell">
+        <figure class="portrait">
+          <img src="public/seunghan-jung.jpg" alt="정승한" width="900" height="1200">
+          <figcaption><span class="portrait-role">Researcher</span><strong>정승한</strong><span class="portrait-en">Seung Han Jung</span></figcaption>
+        </figure>
+        <div>
+          <p class="section-number">About me</p>
+          <h2>Building intelligent<br>systems for engineers.</h2>
+          <p class="body">안녕하세요, IDEA LAB 연구자 정승한입니다. 사람을 이해하고 신뢰를 얻는 지능형 시스템과 공학 설계 자동화를 연구합니다. 현재는 LLM 에이전트가 CFD 격자를 스스로 다듬어 가는 AMR 재격자화와, 에이전트 기반 메시 생성 자동화를 다루고 있습니다.</p>
+          <ul class="affil">
+            <li><span>University</span><strong>Hanyang University ERICA</strong></li>
+            <li><span>Department</span><strong>Mechanical Engineering</strong></li>
+            <li><span>Email</span><a href="mailto:jshan0407@hanyang.ac.kr">jshan0407@hanyang.ac.kr</a></li>
+          </ul>
         </div>
       </div>
     </section>
-
-    <section class="section study-section" id="study">
-      <div class="study-heading">
-        <div><p class="section-index">03 — Study archive</p><h2>Study Materials</h2></div>
-        <p>IDEA LAB에서 정리한 스터디 자료입니다. 각 항목을 누르면 PDF가 새 창에서 열립니다.</p>
-      </div>
-
-      <div class="study-grid">
-        <article class="study-card">
-          <div class="study-card-top"><span class="pdf-badge">PDF</span></div>
-          <h3>Core Machine Learning Algorithms</h3><p>IDEA LAB · Chapter 3</p>
-          <div class="card-actions">
-            <a href="study/IDEA%20LAB%20PPT_Chapter3_Study.pdf" target="_blank" rel="noopener">열기 ↗</a>
-          </div>
-        </article>
-        <article class="study-card">
-          <div class="study-card-top"><span class="pdf-badge">PDF</span></div>
-          <h3>Deep Learning Algorithms</h3><p>IDEA LAB · Chapter 4</p>
-          <div class="card-actions">
-            <a href="study/IDEA%20LAB%20PPT_Chapter4_Study.pdf" target="_blank" rel="noopener">열기 ↗</a>
-          </div>
-        </article>
-        <article class="study-card">
-          <div class="study-card-top"><span class="pdf-badge">PDF</span></div>
-          <h3>Convolutional Neural Networks</h3><p>IDEA LAB · Chapter 5</p>
-          <div class="card-actions">
-            <a href="study/IDEA%20LAB%20PPT_Chapter5_Study.pdf" target="_blank" rel="noopener">열기 ↗</a>
-          </div>
-        </article>
-        <article class="study-card">
-          <div class="study-card-top"><span class="pdf-badge">PDF</span></div>
-          <h3>Recurrent Neural Networks</h3><p>IDEA LAB · Chapter 7</p>
-          <div class="card-actions">
-            <a href="study/IDEA%20LAB%20PPT_Chapter7_RNN_Study.pdf" target="_blank" rel="noopener">열기 ↗</a>
-          </div>
-        </article>
-        <article class="study-card">
-          <div class="study-card-top"><span class="pdf-badge">PDF</span></div>
-          <h3>Performance Optimization</h3><p>IDEA LAB · Chapter 8</p>
-          <div class="card-actions">
-            <a href="study/IDEA%20LAB%20PPT_Chapter8_Study.pdf" target="_blank" rel="noopener">열기 ↗</a>
-          </div>
-        </article>
-        <article class="study-card">
-          <div class="study-card-top"><span class="pdf-badge">PDF</span></div>
-          <h3>PCA &amp; MLE</h3><p>IDEA LAB · Statistical Learning</p>
-          <div class="card-actions">
-            <a href="study/IDEA%20LAB%20PPT_PCA_MLE_Study.pdf" target="_blank" rel="noopener">열기 ↗</a>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <footer id="contact">
-      <div>
-        <p>Open to new research and collaboration.</p>
-        <h2>Let’s make something<br><em>meaningful.</em></h2>
-      </div>
-      <div class="footer-mail"><span>IDEA LAB · 정승한</span><a href="mailto:jshan0407@hanyang.ac.kr">jshan0407@hanyang.ac.kr</a></div>
-      <div class="footer-bottom"><span>© 2026 SEUNG HAN JUNG</span><span>IDEA LAB · SEOUL, SOUTH KOREA</span><a href="#top">BACK TO TOP ↑</a></div>
-    </footer>
   </main>
 
-<script>
-  // 데모 영상: 화면에 들어오면 재생, 나가면 일시정지 (자동재생은 음소거일 때만 허용됨)
-  (function () {
-    var vids = document.querySelectorAll('video.demo-video');
-    if (!('IntersectionObserver' in window)) { vids.forEach(function (v) { v.play().catch(function () {}); }); return; }
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) { var v = e.target; if (e.isIntersecting) { v.play().catch(function () {}); } else { v.pause(); } });
-    }, { threshold: 0.25 });
-    vids.forEach(function (v) { io.observe(v); });
-  })();
-</script>
+  <footer id="contact">
+    <div class="shell">
+      <div class="brand"><img src="public/idea-lab-logo-white.png" alt="IDEA Lab · Hanyang University"></div>
+      <div class="copy">
+        <span>© 2026 IDEA LAB, Hanyang University ERICA. All rights reserved.</span>
+        <small>Seung Han Jung · <a href="mailto:jshan0407@hanyang.ac.kr">jshan0407@hanyang.ac.kr</a></small>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // 데모 영상: 화면에 들어오면 재생, 나가면 일시정지 (자동재생은 음소거일 때만 허용됨)
+    (function () {
+      var vids = document.querySelectorAll('video.demo-video, video.hero-video');
+      if (!('IntersectionObserver' in window)) { vids.forEach(function (v) { v.play().catch(function () {}); }); return; }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { var v = e.target; if (e.isIntersecting) { v.play().catch(function () {}); } else { v.pause(); } });
+      }, { threshold: 0.2 });
+      vids.forEach(function (v) { io.observe(v); });
+    })();
+    // 파이프라인 띠: 배경 영상의 현재 시각에 맞는 단계를 켬
+    (function () {
+      var hero = document.querySelector('video.hero-video'), steps = document.querySelectorAll('#pipeSteps span');
+      if (!hero || !steps.length) return;
+      hero.addEventListener('timeupdate', function () {
+        var t = hero.currentTime;
+        steps.forEach(function (s) { s.classList.toggle('is-on', t >= +s.dataset.from && t < +s.dataset.to); });
+      });
+    })();
+    // 헤더 메뉴: 보고 있는 섹션 표시
+    (function () {
+      var links = document.querySelectorAll('.site-nav a[data-nav]'), ids = ['top', 'demo', 'study', 'about'];
+      function update() {
+        var y = window.scrollY + 120, cur = 'top';
+        ids.forEach(function (id) { var el = document.getElementById(id); if (el && el.offsetTop <= y) cur = id; });
+        links.forEach(function (a) { a.classList.toggle('is-active', a.dataset.nav === cur); });
+      }
+      window.addEventListener('scroll', update, { passive: true }); update();
+    })();
+  </script>
 </body>
 </html>

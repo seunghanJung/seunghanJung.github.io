@@ -1,77 +1,62 @@
 # 정승한 | IDEA LAB Researcher
 
-IDEA LAB 연구 포트폴리오 사이트입니다. AI 에이전트를 활용한 CFD 워크플로 데모와
-스터디 자료를 공개합니다.
+IDEA LAB 연구 포트폴리오 사이트입니다. AI 에이전트를 활용한 CFD 격자 연구 데모와 스터디 자료를 공개합니다.
 
 **https://seunghanjung.github.io/**
 
-## 구성
+## 구성 (2026-11-09 개편, junseokchoi-hyu.github.io 와 같은 결)
 
-- `index.html` — 사이트 전체 (스타일·스크립트 인라인, 빌드 불필요)
-- `public/hanyang-logo.png` — 한양대학교 마크 (원본은 불투명 png였고, 테두리에서
-  연결된 흰 배경만 투명 처리함. 원 안쪽 글자의 흰색은 보존)
-- `public/idea-lab-logo.png` — 연구실 로고 (투명 배경, 여백 크롭 완료)
-- `public/seunghan-jung.jpg` — 프로필 사진 (900×1200으로 축소한 웹용 사본)
-- `public/demos/amr-remeshing-agent.mp4` — 연구 데모 영상 1 (AMR 기반 CFD 재격자화 에이전트, 1884×848, 22 s). 작품 패널의 골드 버튼이 인터랙티브 데모 사이트 https://seunghanjung.github.io/amr-remeshing-agent-demo/ 로 연결됨
-- `public/demos/salome-meshing-agent.mp4` — 연구 데모 영상 2 (SALOME 메싱 에이전트)
-- `study/*.pdf` — 스터디 자료 6건 (Chapter 3/4/5/7/8, PCA & MLE)
+- `index.html` — 사이트 전체 (스타일·스크립트 인라인, 빌드 불필요). 글꼴은 Google Fonts 의 Noto Sans KR.
+  1. 검정 헤더 (흰 IDEA LAB 로고 + Home | Demo | Study | About me, 보고 있는 섹션에 밑줄)
+  2. 첫 화면: **배경 영상** `public/demos/mesh_gen_hero.mp4` (ONERA M6 위에 격자 생성 → AMR refine → 표면 Cp → 충격파, 46 s, 흰 바탕, 투명도 없이 100 %) 위에 이름·소개·버튼. 왼쪽은 흰 그라데이션으로 글자 가독성 확보. 포스터 `mesh_gen_hero_poster.jpg`
+  3. 파이프라인 띠: 배경 영상의 현재 시각에 맞춰 01 Initial mesh / 02 AMR refinement / 03 Surface Cp / 04 Shock wave 가 켜짐 (`timeupdate`)
+  4. 관심 분야 한 줄 (AI Engineering · CFD · Aerodynamic Design)
+  5. Research 01 (남색): AMR-based CFD Remeshing Agent — 녹화 영상 `public/demos/amr-remeshing-agent.mp4` + 파란 알약 버튼 → https://seunghanjung.github.io/amr-remeshing-agent-demo/
+  6. Research 02 (연회색): SALOME Meshing Agent — `public/demos/salome-meshing-agent.mp4`
+  7. Study Materials: 줄 목록 6건 (`study/*.pdf`, 새 창)
+  8. About me: 사진 카드 + 소속·이메일
+  9. 검정 푸터
+- `public/idea-lab-logo-white.png` — 한양대 마크 + IDEA LAB 흰 로고 (헤더·푸터). 이전 색 로고 `idea-lab-logo.png`, `hanyang-logo.png` 는 남겨 둠
+- `public/seunghan-jung.jpg` — 프로필 사진 (900×1200)
+- `index.prev.html` — 개편 전 페이지 백업 (아이보리 바탕, 사진 히어로)
 
-원본 해상도의 사진과 로고는 `.gitignore` 처리되어 로컬에만 있습니다. 사이트가
-불러오는 것은 `public/`의 최적화 사본입니다.
+## 영상 규칙
+
+- 모든 영상은 `autoplay muted loop playsinline` + IntersectionObserver (보일 때만 재생). 브라우저는 음소거 자동재생만 허용.
+- 데모 녹화 영상은 해상도가 달라 `.feature-media video` 에 인라인 `style="aspect-ratio: W / H"` 를 줌 (1884/848, 1910/898). 안 주면 위아래 검은 띠.
+- 배경 영상은 `object-fit: cover; object-position: 62% 50%` 로 오른쪽 날개가 보이게 자름. 원본·고화질판은 `C:\ARM_su2_project\v2\results\mesh_gen_video\` (render_mesh_gen_video.py → blend_frames.py → encode_mesh_gen_video.sh). 사이트용은 1280×720 CRF 27.
 
 ## 로컬에서 보기
 
-`index.html`을 브라우저로 바로 열면 됩니다. 별도 서버나 빌드 과정이 없습니다.
+`index.html` 을 브라우저로 바로 열면 됩니다. (Claude Code 에서는 `.claude/launch.json` 의 `homepage-static`, 8766 포트)
 
 ## 배포
 
-저장소 이름이 `seunghanJung.github.io`라 GitHub Pages의 **user site**로 동작합니다.
-경로 없이 계정 루트 주소로 서비스되는 형태입니다. Source는 `main` 브랜치의
-`/ (root)`이고, 루트의 `.nojekyll`이 Jekyll 전처리를 건너뛰게 합니다.
+저장소 이름이 `seunghanJung.github.io` 라 GitHub Pages **user site** 로 동작합니다. Source 는 `main` 의 `/ (root)`, 루트의 `.nojekyll` 이 Jekyll 전처리를 건너뜁니다.
 
 ```bash
 git add -A; if ($?) { git commit -m "메시지" }; if ($?) { git push }
 ```
 
-push 후 20~30초면 반영됩니다. 브라우저가 이전 사본을 들고 있는 경우가 잦으니
-확인할 때는 Ctrl+Shift+R로 새로고침하세요.
+push 후 20~30 초면 반영됩니다. 이전 사본이 남아 있으면 Ctrl+Shift+R.
 
-> 이전 주소 `snowfalling-master.github.io/snowfall/`은 계정·저장소 이름을 바꾸면서
-> 404가 되었습니다.
-
-## 색상 팔레트
+## 색상
 
 | 변수 | 값 | 용도 |
 | --- | --- | --- |
-| `--accent` | `#0f52ba` | 사파이어 — 강조 텍스트, 티커, 배지, 현재 챕터 |
-| `--ink` | `#0f213d` | 딥 네이비 — 본문, 데모 패널, 네임플레이트, footer 배경 |
-| `--acid` | `#f0c14b` | 골드 — 포인트 (마이크로 라벨, 티커 구분 기호) |
-| `--ivory` / `--line` | `#fdfbf6` / `#e2dfd6` | 종이 톤 배경과 구분선 |
-| `--muted` | `#6b7484` | 보조 텍스트 |
-
-한양대 마크의 남색과 IDEA LAB 로고의 `#004483`이 사파이어 계열 안에 들어와
-헤더에서 팔레트가 어긋나지 않습니다.
+| `--black` | `#0b0d10` | 헤더·푸터 |
+| `--navy` | `#0f213d` | Research 01 블록, 사진 캡션 |
+| `--blue` | `#0f52ba` | 포인트 (버튼, 섹션 번호, 링크) |
+| `--mist` / `--line` | `#f3f5f8` / `#e1e6ec` | 연회색 블록과 구분선 |
+| `--gold` | `#f0c14b` | 사진 캡션 포인트 선 |
 
 ## 편집 시 유의할 점
 
-- 본문 기준 글자 크기는 16px입니다. 지도 피드백에서 "폰트가 전반적으로 작다"는
-  지적을 받아 13~14px에서 올린 값이라, 다시 낮추지 않는 편이 좋습니다.
-- 데모 챕터 버튼(01/02/03)은 클릭 가능해 보여야 한다는 피드백에 따라 테두리,
-  hover 시 상승, `▶ PLAY` / `NOW PLAYING` 표시를 넣었습니다.
-- 긴 한국어 문단에는 `word-break: keep-all`과 `text-wrap: pretty`를 함께 씁니다.
-  마지막 줄에 단어가 하나만 남는 것을 막기 위한 설정입니다.
-- 스터디 카드에는 다운로드 버튼이 없습니다. `열기 ↗` 하나만 있으므로, 안내
-  문구에 "내려받기"를 다시 넣지 마세요.
-- 데모는 `.featured-work` 작품 패널을 위에서부터 쌓는 구조입니다 (현재 2개: AMR 재격자화
-  에이전트 → SALOME). `.demo-video-shell`의 전역 `aspect-ratio`는 SALOME 영상(1910×898)
-  기준이고, 다른 해상도 영상은 그 shell 에 인라인 `style="aspect-ratio: W / H"` 를 줍니다.
-  그러지 않으면 위아래에 검은 여백이 생깁니다.
-
-- 헤더 nav 끝의 `Demo`(재생 아이콘, 네이비 채움) / `Study`(책 아이콘, 테두리) 알약 버튼은 #work / #study 로 바로 가는 바로가기입니다.
-- 데모 영상은 `autoplay muted loop playsinline` + IntersectionObserver 로, 화면에 보일 때만 재생되고 벗어나면 멈춥니다 (브라우저가 음소거 자동재생만 허용). 소리가 필요하면 사용자가 컨트롤로 켭니다.
-- 작품 패널의 링크 문구는 영어입니다 (See related study materials / Open the interactive demo site).
+- 본문 16 px 기준 (지도 피드백: 글자 작게 하지 말 것).
+- 긴 한국어 문단에는 `word-break: keep-all` + `text-wrap: pretty`.
+- 스터디 목록에는 다운로드 버튼이 없고 `PDF ↗` 하나만.
+- 파이프라인 띠의 `data-from/data-to` 는 배경 영상의 장면 시각(초)과 맞춰야 함. 영상을 바꾸면 같이 고칠 것.
 
 ## 참고
 
-이 저장소에는 별개의 Vite/Cloudflare Workers 실험 코드(`app/`, `worker/`, `db/`)가
-함께 있습니다. 공개되는 사이트는 루트의 `index.html` 정적 페이지입니다.
+이 저장소에는 별개의 Vite/Cloudflare Workers 실험 코드(`app/`, `worker/`, `db/`)가 함께 있습니다. 공개되는 사이트는 루트의 `index.html` 정적 페이지입니다.
