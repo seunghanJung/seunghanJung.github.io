@@ -67,6 +67,10 @@ push 후 20~30초면 반영됩니다. 브라우저가 이전 사본을 들고 �
   기준이고, 다른 해상도 영상은 그 shell 에 인라인 `style="aspect-ratio: W / H"` 를 줍니다.
   그러지 않으면 위아래에 검은 여백이 생깁니다.
 
+- 헤더 nav 끝의 `Demo`(재생 아이콘, 네이비 채움) / `Study`(책 아이콘, 테두리) 알약 버튼은 #work / #study 로 바로 가는 바로가기입니다.
+- 데모 영상은 `autoplay muted loop playsinline` + IntersectionObserver 로, 화면에 보일 때만 재생되고 벗어나면 멈춥니다 (브라우저가 음소거 자동재생만 허용). 소리가 필요하면 사용자가 컨트롤로 켭니다.
+- 작품 패널의 링크 문구는 영어입니다 (See related study materials / Open the interactive demo site).
+
 ## 참고
 
 이 저장소에는 별개의 Vite/Cloudflare Workers 실험 코드(`app/`, `worker/`, `db/`)가
