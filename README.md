@@ -8,7 +8,7 @@ IDEA LAB 연구 포트폴리오 사이트입니다. AI 에이전트를 활용한
 
 - `index.html` — 사이트 전체 (스타일·스크립트 인라인, 빌드 불필요). 글꼴은 Google Fonts 의 Noto Sans KR.
   1. 검정 헤더 (흰 IDEA LAB 로고 + Home | Demo | Study | About me, 보고 있는 섹션에 밑줄)
-  2. 첫 화면: **배경 영상** `public/demos/mesh_gen_hero.mp4` (ONERA M6 위에 격자 생성 → AMR refine → 표면 Cp → 충격파, 46 s, 흰 바탕, 투명도 없이 100 %) 위에 이름·소개·버튼. 왼쪽은 흰 그라데이션으로 글자 가독성 확보. 포스터 `mesh_gen_hero_poster.jpg`
+  2. 첫 화면: **배경 영상** `public/demos/mesh_gen_hero_1080p.mp4` (1920×1080 CRF 17 원본, 47 MB — 사용자 선택) 이 기본이고, 화면 폭 900 px 미만·데이터 절약 모드에서는 인라인 스크립트가 `mesh_gen_hero_720p.mp4` (7.6 MB) 로 바꿈. 내용: ONERA M6 위에 격자 생성 → AMR refine → 표면 Cp → 충격파, 46 s, 흰 바탕, 투명도 없이 100 %. 위에 이름·소개·버튼, 왼쪽은 흰 그라데이션으로 글자 가독성 확보. 포스터 `mesh_gen_hero_poster.jpg`
   3. 파이프라인 띠: 배경 영상의 현재 시각에 맞춰 01 Initial mesh / 02 AMR refinement / 03 Surface Cp / 04 Shock wave 가 켜짐 (`timeupdate`)
   4. 관심 분야 한 줄 (AI Engineering · CFD · Aerodynamic Design)
   5. Research 01 (남색): AMR-based CFD Remeshing Agent — 녹화 영상 `public/demos/amr-remeshing-agent.mp4` + 파란 알약 버튼 → https://seunghanjung.github.io/amr-remeshing-agent-demo/

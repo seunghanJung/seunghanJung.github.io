@@ -198,9 +198,17 @@
   <main id="top">
     <!-- 첫 화면: 배경 영상 = 초기 격자 생성 → AMR refine → 표면 Cp → 충격파 -->
     <section class="hero">
-      <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="public/demos/mesh_gen_hero_poster.jpg" aria-label="ONERA M6 날개 위에 격자가 생성되고 refine 되는 영상">
-        <source src="public/demos/mesh_gen_hero.mp4" type="video/mp4">
+      <!-- 1080p 원본(47 MB)이 기본. 좁은 화면이나 데이터 절약 모드에서는 아래 스크립트가 720p(7.6 MB)로 바꿈 -->
+      <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="public/demos/mesh_gen_hero_poster.jpg" data-src-1080="public/demos/mesh_gen_hero_1080p.mp4" data-src-720="public/demos/mesh_gen_hero_720p.mp4" aria-label="ONERA M6 날개 위에 격자가 생성되고 refine 되는 영상">
+        <source src="public/demos/mesh_gen_hero_1080p.mp4" type="video/mp4">
       </video>
+      <script>
+        (function () {
+          var v = document.querySelector('video.hero-video'); if (!v) return;
+          var c = navigator.connection || {}, small = window.innerWidth < 900 || c.saveData || /(^|-)2g$/.test(c.effectiveType || '');
+          if (small) { v.querySelector('source').src = v.dataset.src720; v.load(); }
+        })();
+      </script>
       <div class="shell">
         <div class="hero-copy">
           <p class="hero-role">Researcher · IDEA Lab</p>
