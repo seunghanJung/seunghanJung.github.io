@@ -108,6 +108,10 @@
     .tag-row span { border: 1px solid #566a8a; padding: 8px 13px; border-radius: 50px; color: #cad0dd; font-size: 12px; font-weight: 650; }
     .work-copy > a { display: flex; justify-content: space-between; border-top: 1px solid #4f6180; padding-top: 20px; font-size: 14px; font-weight: 700; transition: color .2s ease; }
     .work-copy > a:hover { color: var(--acid); }
+    .featured-work + .featured-work { margin-top: 36px; }
+    .work-links { display: flex; flex-direction: column; gap: 0; }
+    .demo-site-link { display: flex; justify-content: space-between; align-items: center; margin-top: 16px; padding: 14px 18px; border: 1px solid var(--acid); color: var(--acid); font-size: 14px; font-weight: 800; letter-spacing: .04em; transition: background .2s ease, color .2s ease; }
+    .demo-site-link:hover { background: var(--acid); color: var(--ink); }
 
     .research-areas { border-top: 1px solid var(--line); }
     .areas-layout { display: grid; grid-template-columns: .8fr 1.2fr; gap: 10vw; }
@@ -234,8 +238,32 @@
     <section class="section" id="work">
       <div class="section-heading">
         <div><p class="section-index">01 — Selected research</p><h2>Research Demo</h2></div>
-        <p>AI 에이전트를 활용한 메시 생성 자동화 연구 과정을 영상으로 확인할 수 있습니다.</p>
+        <p>AI 에이전트가 CFD 격자를 스스로 다듬어 가는 AMR 재격자화 에이전트와, SALOME 안에서 메시를 생성하는 에이전트 데모를 영상으로 확인할 수 있습니다.</p>
       </div>
+
+      <article class="featured-work">
+        <div class="demo-frame">
+          <div class="demo-player">
+            <div class="demo-player-topline"><span>DEMO</span><span>AMR-BASED CFD REMESHING AGENT</span></div>
+            <!-- 이 녹화본은 1884x848 이라 전역 값(1910/898) 대신 자기 비율을 씀 -->
+            <div class="demo-video-shell" style="aspect-ratio: 1884 / 848;">
+              <video class="demo-video" controls playsinline preload="metadata" aria-label="AMR 기반 CFD 재격자화 에이전트 데모 영상">
+                <source src="public/demos/amr-remeshing-agent.mp4" type="video/mp4">
+                현재 브라우저에서는 동영상을 재생할 수 없습니다.
+              </video>
+            </div>
+          </div>
+        </div>
+        <div class="work-copy">
+          <h3>AMR-based CFD<br>Remeshing Agent</h3>
+          <p>LLM 에이전트(Qwen)가 ONERA M6 날개의 RANS 해석(SU2)과 적응 격자 세분화(NASA refine)를 반복하며 격자 세분화 변수를 스스로 조정하고, 압력 분포가 수렴하면 멈추는 데모입니다. 초보자·중급자·숙련자 수준의 입력 격자 세 가지를 같은 조건에서 비교합니다.</p>
+          <div class="tag-row"><span>AI AGENT</span><span>AMR</span><span>SU2 · RANS</span><span>NASA REFINE</span><span>QWEN</span></div>
+          <div class="work-links">
+            <a href="#study">연관 스터디 자료 보기 <span>↓</span></a>
+            <a class="demo-site-link" href="https://seunghanjung.github.io/amr-remeshing-agent-demo/" target="_blank" rel="noopener">인터랙티브 데모 사이트 열기 <span>↗</span></a>
+          </div>
+        </div>
+      </article>
 
       <article class="featured-work">
         <div class="demo-frame">

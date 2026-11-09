@@ -12,7 +12,8 @@ IDEA LAB 연구 포트폴리오 사이트입니다. AI 에이전트를 활용한
   연결된 흰 배경만 투명 처리함. 원 안쪽 글자의 흰색은 보존)
 - `public/idea-lab-logo.png` — 연구실 로고 (투명 배경, 여백 크롭 완료)
 - `public/seunghan-jung.jpg` — 프로필 사진 (900×1200으로 축소한 웹용 사본)
-- `public/demos/salome-meshing-agent.mp4` — 연구 데모 영상 (SALOME 메싱 에이전트)
+- `public/demos/amr-remeshing-agent.mp4` — 연구 데모 영상 1 (AMR 기반 CFD 재격자화 에이전트, 1884×848, 22 s). 작품 패널의 골드 버튼이 인터랙티브 데모 사이트 https://seunghanjung.github.io/amr-remeshing-agent-demo/ 로 연결됨
+- `public/demos/salome-meshing-agent.mp4` — 연구 데모 영상 2 (SALOME 메싱 에이전트)
 - `study/*.pdf` — 스터디 자료 6건 (Chapter 3/4/5/7/8, PCA & MLE)
 
 원본 해상도의 사진과 로고는 `.gitignore` 처리되어 로컬에만 있습니다. 사이트가
@@ -61,9 +62,10 @@ push 후 20~30초면 반영됩니다. 브라우저가 이전 사본을 들고 �
   마지막 줄에 단어가 하나만 남는 것을 막기 위한 설정입니다.
 - 스터디 카드에는 다운로드 버튼이 없습니다. `열기 ↗` 하나만 있으므로, 안내
   문구에 "내려받기"를 다시 넣지 마세요.
-- 데모는 영상 하나만 두는 구조입니다. `.demo-video-shell`의 `aspect-ratio`가
-  현재 영상 해상도(1910×898)에 맞춰져 있으니, 다른 영상으로 바꾸면 그 값도 함께
-  고쳐야 합니다. 그러지 않으면 위아래에 검은 여백이 생깁니다.
+- 데모는 `.featured-work` 작품 패널을 위에서부터 쌓는 구조입니다 (현재 2개: AMR 재격자화
+  에이전트 → SALOME). `.demo-video-shell`의 전역 `aspect-ratio`는 SALOME 영상(1910×898)
+  기준이고, 다른 해상도 영상은 그 shell 에 인라인 `style="aspect-ratio: W / H"` 를 줍니다.
+  그러지 않으면 위아래에 검은 여백이 생깁니다.
 
 ## 참고
 
